@@ -1,0 +1,77 @@
+.nav {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-right {
+    font-size: 20px;
+    padding-right: 100px;
+    text-align: right;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    white-space: nowrap;
+}
+
+.initials {
+    margin-right: 1px;
+    transition: margin 0.5s ease 0s;
+}
+
+.name-part {
+    overflow: hidden;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: max-width 0.5s ease;
+    max-width: 0;
+}
+
+.nav-left:hover .initials:nth-child(1) {
+    margin-right: 1px;
+}
+
+.nav-left:hover .initials:nth-child(3) {
+    margin-left: 5px;
+}
+
+.nav-left:hover .name-part {
+    max-width: 120px;
+}
+
+.hidden-text {
+    display: inline-block;
+    transition: transform 0.1s ease 0s;
+    transform: translateY(100%);
+}
+
+.nav-left:hover .hidden-text {
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+.nav-left .hidden-text {
+    transition-delay: 0s;
+}
