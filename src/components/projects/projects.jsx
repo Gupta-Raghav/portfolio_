@@ -4,26 +4,26 @@ function projects() {
   return (
     <div className='projects'>
         <div className="title">
-            Projects
+            <h2>Selected Projects</h2>
         </div>
-            <div class="card">
+            <div class="carda">
                 <h2><span>Project #1</span>Title of the Project</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
             </div>
-            <div class="card">
+            <div class="cardb">
                 <h2><span>Project #2</span>Title of the Project</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
             </div>
-            <div class="card">
+            <div class="cardc">
                 <h2><span>Project #3</span>Title of the Project</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
             </div>
-            <div class="card">
+            {/* <div class="card">
                 <h2><span>Project #3</span>Title of the Project</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
-            </div>
+            </div> */}
     </div>
   )
 }
 
-export default projects
+export default projects 

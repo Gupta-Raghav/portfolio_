@@ -1,0 +1,118 @@
+.About-Container {
+    height: 100vh;
+    background-color: var(--secondaryBG-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bento_container {
+    margin: 120px;
+    display: flex;
+    height: 80%;
+    width: 85%;
+}
+
+.bento-left,
+.bento-right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.bento-left .first_container {
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bento-left .text_container {
+    height: 70%;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+.bento-left .first_container .text_container:nth-child(1) {
+    background-color: aqua;
+}
+
+.bento-left .first_container .text_container:nth-child(2) {
+    background-color: blue;
+    height: 30%;
+}
+
+.bento-left .last-container {
+    height: 50%;
+    display: flex;
+    gap: 20px;
+}
+
+.last-container .text_container {
+    height: 100%;
+    width: 50%;
+}
+
+.last-container .text_container:nth-child(1) {
+    background-color: red;
+}
+
+.last-container .text_container:nth-child(2) {
+    background-color: green;
+}
+
+.text_container {
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+.bento-left .bento-text,
+.bento-right .bento-text {
+    padding: 15px;
+    font-size: 40px;
+}
+
+.bento-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.bento-right .first_half,
+.bento-right .last_half {
+    height: 100%;
+    gap: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-right .text_container {
+    height: 100%;
+    width: 100%;
+}
+
+.bento-right .last_half .first_container,
+.bento-right .first_half .first_container {
+    height: 55%;
+}
+
+.bento-right .last_half .first_container .text_container,
+.bento-right .first_half .first_container .text_container {
+    background-color: bisque;
+}
+
+.bento-right .last_half .first_container {
+    height: 30%;
+}
+
+.bento-right .last_half .last-container {
+    height: 70%;
+}
+
+.bento-right .first_half .last-container,
+.bento-right .first_half .first-container {
+    height: 50%;
+}
