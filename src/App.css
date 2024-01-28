@@ -22,6 +22,10 @@ body::-webkit-scrollbar {
     display: none;
     /* Hide the scrollbar */
 }
+html{
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
 
 /* .App {
     overflow-y: hidden;

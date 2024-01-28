@@ -10,10 +10,15 @@ import Lenis from '@studio-freight/lenis'
 
 function Projects() {
   const container = useRef(null);
+  const title = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start start', 'end end']
+  },{
+    target: title,
+    offset: ['start end', 'end end']
   })
+ 
 
   useEffect( () => {
     const lenis = new Lenis()
@@ -27,8 +32,10 @@ function Projects() {
   })
   return (
     <div ref={ container} className='projects'>
-        <div className="title">
-            <h2>Selected Projects</h2>
+        <div className='title_container'>
+        <div ref = {title} className="title">
+            <h3>Selected Projects</h3>
+        </div>
         </div>
         {
           projects.map((project,i) => {

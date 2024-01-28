@@ -1,0 +1,105 @@
+.contact{
+    min-height: 80vh;
+    background-color: var(--secondaryBG-color); 
+}
+.wrapper {
+    min-height: 70vh;
+    display: grid;
+    margin: 0 auto 0;
+    padding: 100px 0;
+    max-width: 80%;
+    grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+ 
+    /* grid-gap: 10px; */
+}
+.wrapper div {
+    border: 3px solid rgb(49, 50, 49);
+    color: white;
+}
+.wrapper .grid3 form div{
+    border-radius: 1rem;
+}
+.grid1 {
+ 
+    box-sizing: border-box; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.grid1 .bento-text{
+    font-size: 15rem;
+    font-weight: 100;
+}
+
+.grid2 {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12rem;
+   
+}
+
+.grid3 {
+    padding: 20px 20px 0px 20px;
+  
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between; 
+}
+.form label {
+    color: var(--text-color); 
+    font-size: 2rem;
+    display: block;
+}
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color); /* You can replace with your color preference */
+    font-size: 16px;
+    box-sizing: border-box; 
+}
+.form input:focus, .form textarea:focus {
+    outline: none;
+    color: white;
+}
+.form .message{
+    height: 15rem;
+    overflow: hidden;
+}
+.form .message textarea{
+    height: 100%;
+    resize:none;
+   
+
+}
+.form button {
+    background-color: var(--redsecondary-color); /* You can replace with your color preference */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 120%;
+    align-self: flex-end; /* Aligns the button to the end */
+    margin-top: 40px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+ 
+    .grid1 .bento-text {
+        font-size: 4rem; /* Adjust font size */
+        font-weight: 100;
+    }
+}

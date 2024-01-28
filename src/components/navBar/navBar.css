@@ -1,5 +1,7 @@
 .nav {
-    z-index: 1;
+    border-bottom: 2px solid #3c3c3c;
+    backdrop-filter: blur(10px);
+    z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
@@ -27,6 +29,13 @@
     font-weight: 100;
     padding-right: 100px;
     text-align: right;
+}.nav-right a {
+    color: white; /* Set the color for unvisited links */
+    text-decoration: none; /* Optional: Removes underline from links */
+}
+
+.nav-right a:visited {
+    color: white; /* Set the color for visited links */
 }
 
 .logo {

@@ -1,0 +1,42 @@
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.social-media a {
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.desktop-text {
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .social-media {
+        display: none; /* Hide social media links on desktop */
+    }
+    .footer-content {
+        font-size: 1.4rem;
+    }
+
+    .desktop-text {
+        display: block; /* Show this text only on desktop */
+    }
+}

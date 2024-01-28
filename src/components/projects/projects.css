@@ -1,20 +1,36 @@
 .projects {
 background-color: #000;
-position:relative;
-border: red 1px solid;
 
 }
 
-.projects .title {
+.title_container{
+    border-bottom: 2px solid #272727;
+    z-index: 6;
+    padding-top: 2%;
+    padding-left: 10%;
     position: sticky;
-    top: 20px;
-    margin-top: 100px;
-    margin-left: 100px;
-    color: var(--redsecondary-color);
-    z-index: 2;
-}a
+    display: flex;
+    align-items: center;
+    /* height: 50%; */
+    top: 70px;
+    backdrop-filter: blur(10px);
+    height: 5rem;
+    text-align: left;
+}
 
+.title {
+    font-size: 3rem;
+    color: var(--redsecondary-color);
+}
 .projects::-webkit-scrollbar {
     display: none;
 }
-
+@media (max-width: 600px) {
+    .title_container{
+        padding-left: 5%;
+        
+    }
+    .title {
+        font-size: 2rem;
+    }
+}

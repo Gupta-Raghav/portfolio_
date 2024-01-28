@@ -28,9 +28,9 @@ function NavBar() {
         </div>
       </div>
       <div className='nav-right'>
-        <p>About</p>
+        <a href='#About'><p>About</p></a>
         <p>Work</p>
-        <p>Contact</p>
+        <a href='#contact'><p>Contact</p></a>
       </div>
     </div>
   );
