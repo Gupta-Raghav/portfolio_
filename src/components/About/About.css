@@ -1,56 +1,79 @@
 .About {
-    position: relative;
     height: 100vh;
-    width: 100%;
     background-color: var(--secondaryBG-color);
-    padding-top: 100px;
-
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
-.About h3 {
-    position: absolute;
-    top: 30%;
-    left: 10%;
+.About-content h3 {
+    font-weight: 100;
+    font-size: 30px;
     color: var(--redsecondary-color);
+    margin-bottom: 20px;
+        /* Add space below the heading */
 }
 
 .About-content {
-    width: 80%;
+    margin: 200px 10%;
+    text-align: left;
+    max-width: 80%;
     font-size: 60px;
-    font-weight: bold;
-    /* background-color: red; */
-    position: absolute;
-    top: 35%;
-    left: 10%;
     color: var(--secondary-color);
+    margin-bottom: 20px;
+        /* Add space below the content */
 }
 
 .About-content span {
     color: var(--text-color);
 }
 
+.skills {
+    max-width: 80%;
+    margin: 0 10%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
 .skills h3 {
-    position: absolute;
-    top: 60%;
-    left: 10%;
+    font-size: 30px;
+    font-weight: 100;
+    padding-top: 10px;
     color: var(--redsecondary-color);
+    margin-bottom: 20px;
+        /* Add space below the heading */
 }
 
 .skill-icons {
-    position: absolute;
     display: flex;
-    width: 80%;
-    justify-content: space-between;
-    top: 65%;
-    left: 10%;
+    gap: 20px;
+    flex-wrap: wrap;
+        /* Allow icons to wrap on small screens */
 }
 
 .skill-icons img {
     height: 100px;
     width: 100px;
-
 }
+@media (max-width: 600px) {
+    .About {
+        padding: 100px 5% 0; /* Adjusted padding */
+    }
 
-.skill-icons img:nth-child(1) {
-    margin-left: 0%;
+    .About h3,
+    .skills h3 {
+        font-size: 24px;
+    }
+
+    .About-content {
+        margin: 150px 5% 0;
+        font-size: 40px;
+    }
+    .skills{
+       margin: 20px 5% 0;
+    }
+    .skill-icons img {
+        max-height: 60px; /* Smaller icons */
+        max-width: 60px;
+    }
 }

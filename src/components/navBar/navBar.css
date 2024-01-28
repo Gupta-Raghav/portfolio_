@@ -5,18 +5,17 @@
     left: 0;
     height: fit-content;
     background-color: rgba(0, 0, 0, 0.3);
-    width: 100%;
     display: flex;
+    width: 100%;
+    flex-grow: 1;
     padding-top: 10px;
     color: white;
     justify-content: space-between;
-    align-items: center;
 }
 
 .nav-left {
     color: var(--text-color);
     font-size: 30px;
-    font-weight: bold;
     padding-left: 100px;
     display: flex;
     justify-content: center;
@@ -25,6 +24,7 @@
 
 .nav-right {
     font-size: 20px;
+    font-weight: 100;
     padding-right: 100px;
     text-align: right;
 }
@@ -74,4 +74,10 @@
 
 .nav-left .hidden-text {
     transition-delay: 0s;
+}
+
+@media (max-width: 600px){
+    .nav-left,.nav-right{
+        padding: 0 5%;
+    }
 }

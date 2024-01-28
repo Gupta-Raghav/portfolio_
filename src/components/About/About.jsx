@@ -12,10 +12,10 @@ import py from '../../Assets/Python.png'
 function About() {
   return (
     <div className='About' id='About'>
+       <div className='About-content'>
        <h3>
         About me
        </h3>
-       <div className='About-content'>
         <p>
         I am a diversely skilled <span>Software Developer</span> with strong focus on developing user friendly and efficient products
         </p>

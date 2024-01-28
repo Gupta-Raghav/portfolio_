@@ -1,29 +1,45 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './projects.css'
-function projects() {
+// import gsap from 'gsap'
+// import { ScrollTrigger } from 'gsap/all'
+// import { useGSAP } from '@gsap/react'
+import {projects}from './data'
+import Card from './card'
+import { useScroll } from 'framer-motion';
+import Lenis from '@studio-freight/lenis'
+
+function Projects() {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start start', 'end end']
+  })
+
+  useEffect( () => {
+    const lenis = new Lenis()
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  })
   return (
-    <div className='projects'>
+    <div ref={ container} className='projects'>
         <div className="title">
             <h2>Selected Projects</h2>
         </div>
-            <div class="carda">
-                <h2><span>Project #1</span>Title of the Project</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
-            </div>
-            <div class="cardb">
-                <h2><span>Project #2</span>Title of the Project</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
-            </div>
-            <div class="cardc">
-                <h2><span>Project #3</span>Title of the Project</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
-            </div>
-            {/* <div class="card">
-                <h2><span>Project #3</span>Title of the Project</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, perspiciatis blanditiis accusamus commodi consectetur id tempora rem iure eligendi quos eos et autem ratione exercitationem earum laborum ad a sequi!</p>
-            </div> */}
+        {
+          projects.map((project,i) => {
+            const targetScale = 1 - ( (projects.length - i) * 0.05);
+            return <Card key={`p_${i}`} i={i} {...project} progress={scrollYProgress} range={[i * .2, 1]} targetScale={targetScale}/>
+          })
+        }
+         
     </div>
   )
 }
 
-export default projects 
+export default Projects 
+

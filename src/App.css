@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 :root {
     --text-color: #EB5939;
 
@@ -22,6 +23,6 @@ body::-webkit-scrollbar {
     /* Hide the scrollbar */
 }
 
-.App {
+/* .App {
     overflow-y: hidden;
-}
+} */
