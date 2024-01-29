@@ -6,20 +6,19 @@ background-color: #000;
 .title_container{
     border-bottom: 2px solid #272727;
     z-index: 6;
-    padding-top: 2%;
     padding-left: 10%;
     position: sticky;
     display: flex;
     align-items: center;
     /* height: 50%; */
-    top: 70px;
+    top: 80px;
     backdrop-filter: blur(10px);
     height: 5rem;
     text-align: left;
 }
 
 .title {
-    font-size: 3rem;
+    font-size: 1.2rem;
     color: var(--redsecondary-color);
 }
 .projects::-webkit-scrollbar {
@@ -31,6 +30,6 @@ background-color: #000;
         
     }
     .title {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 }

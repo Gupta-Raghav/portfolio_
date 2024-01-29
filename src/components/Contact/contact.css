@@ -1,48 +1,34 @@
 .contact{
-    min-height: 80vh;
     background-color: var(--secondaryBG-color); 
 }
 .wrapper {
-    min-height: 70vh;
-    display: grid;
-    margin: 0 auto 0;
-    padding: 100px 0;
+  
+    display: flex;
+    margin: 0 auto;
+    padding: 200px 0 100px 0;
     max-width: 80%;
-    grid-template-columns:
-    repeat(auto-fit, minmax(250px, 1fr));
- 
-    /* grid-gap: 10px; */
 }
 .wrapper div {
-    border: 3px solid rgb(49, 50, 49);
+    border: 1px solid rgb(49, 50, 49);
     color: white;
 }
 .wrapper .grid3 form div{
     border-radius: 1rem;
 }
 .grid1 {
- 
-    box-sizing: border-box; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 50%;
+  
    
 }
 .grid1 .bento-text{
-    font-size: 15rem;
+    font-size: 6rem;
     font-weight: 100;
 }
 
-.grid2 {
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12rem;
-   
-}
 
 .grid3 {
+    width: 50%;
     padding: 20px 20px 0px 20px;
   
 }
@@ -98,8 +84,10 @@ form input, form textarea {
 
 @media (max-width: 600px) {
  
-    .grid1 .bento-text {
-        font-size: 4rem; /* Adjust font size */
-        font-weight: 100;
+    .contact_card{
+        display: none;
+    }
+    .grid3{
+        width: 100%;
     }
 }

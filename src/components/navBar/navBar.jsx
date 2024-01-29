@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './navBar.css';
 
@@ -12,6 +12,9 @@ function NavBar() {
   const handleMouseOut = () => {
     setIsHovered(false);
   };
+
+  const plane = useRef(null);
+ 
 
   return (
     <div className='nav'>
@@ -27,13 +30,34 @@ function NavBar() {
             </div>
         </div>
       </div>
-      <div className='nav-right'>
-        <a href='#About'><p>About</p></a>
-        <p>Work</p>
-        <a href='#contact'><p>Contact</p></a>
+     
+       <div className="container">
+
+      <div ref={plane} className="navBody">
+      <a href='#About'> <Text3d primary={"About"} secondary={"About"}/></a>
+          <a href='#About'> <Text3d primary={"Work"} secondary={"Work"}/></a>
+          <a href='#contact'> <Text3d primary={"Contact"} secondary={"Contact"}/></a>
       </div>
+
+    </div>
     </div>
   );
 }
+function Text3d({primary, secondary}) {
 
+
+
+  return (
+
+      <div className="navTextContainer">
+
+          <p className="primary">{primary}</p>
+
+          <p className="secondary">{secondary}</p>
+
+      </div>
+
+  )
+
+}
 export default NavBar;

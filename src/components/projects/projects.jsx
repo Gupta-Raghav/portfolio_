@@ -6,7 +6,6 @@ import './projects.css'
 import {projects}from './data'
 import Card from './card'
 import { useScroll } from 'framer-motion';
-import Lenis from '@studio-freight/lenis'
 
 function Projects() {
   const container = useRef(null);
@@ -20,16 +19,7 @@ function Projects() {
   })
  
 
-  useEffect( () => {
-    const lenis = new Lenis()
 
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-  })
   return (
     <div ref={ container} className='projects'>
         <div className='title_container'>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './contact.css'
+import CardComponent from './Contact_card';
 function Contact() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -11,15 +12,17 @@ function Contact() {
     };
   return (
     <div className="contact" id="contact">
+         <div className='title_container'>
+        <div className="title">
+            <h3>Contact</h3>
+        </div>
+        </div>
            <div class="wrapper">
-        <div className="grid1">
-            <h2 className='bento-text'>
-                CONTACT
-            </h2 >
+        
+            <div className="contact_card">
+            <CardComponent/>
             </div>
-            {/* <div className="grid2">
-               *
-            </div> */}
+            
             <div class="grid3">
             <form onSubmit={handleSubmit} className='form'>
                 <label htmlFor="name">Name</label>

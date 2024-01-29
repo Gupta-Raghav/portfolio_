@@ -2,11 +2,9 @@
     background-color: rgb(0, 0, 0);
     min-height: 100vh;
     color: white;
-    background-image: url('https://raw.githubusercontent.com/Gupta-Raghav/portfolio_/main/src/Assets/unnamed.jpg');
+    background-image: url('../../Assets/RG_Desktop.jpg');
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
-    background-position-x: -150px;
 
 }
 
@@ -23,8 +21,8 @@
 
 .hero-content {
     position: absolute;
-    top: 35%;
-    left: 42%;
+    top: 40%;
+    left: 40%;
     text-align: center;
 }
 
@@ -76,8 +74,8 @@
 }
 @media (max-width: 600px) {
     .hero {
-        background-position: -530px 50px;
-    
+        background-image: url('../../Assets/RG_mobile1.jpg');
+        
     }
     .hero-heading {
         font-size: 20px;
@@ -85,7 +83,7 @@
     
 .hero-content {
     top: 35%;
-    left: 35%;
+    left: 30%;
 }
     .hero-main h1{
         font-size: 35px;

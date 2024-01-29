@@ -8,7 +8,7 @@
 
 .About-content h3 {
     font-weight: 100;
-    font-size: 5rem;
+    font-size: 2rem;
     color: var(--redsecondary-color);
     margin-bottom: 20px; 
         /* Add space below the heading */
@@ -18,7 +18,7 @@
     margin: 200px 10%;
     text-align: left;
     max-width: 80%;
-    font-size: 8rem;
+    font-size: 4rem;
     color: var(--secondary-color);
     margin-bottom: 20px;
         /* Add space below the content */
@@ -36,7 +36,7 @@
     flex-direction: column;
 }
 .skills h3 {
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: 100;
     padding-top: 10px;
     color: var(--redsecondary-color);
@@ -52,8 +52,8 @@
 }
 
 .skill-icons img {
-    height: 12rem;
-    width: 12rem;
+    height: 5rem;
+    width: 5rem;
 }
 @media (max-width: 600px) {
    
