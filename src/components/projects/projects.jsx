@@ -1,8 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import './projects.css'
-// import gsap from 'gsap'
-// import { ScrollTrigger } from 'gsap/all'
-// import { useGSAP } from '@gsap/react'
+
 import {projects}from './data'
 import Card from './card'
 import { useScroll } from 'framer-motion';
@@ -21,7 +19,7 @@ function Projects() {
 
 
   return (
-    <div ref={ container} className='projects'>
+    <div ref={ container} className='projects' id="projects">
         <div className='title_container'>
         <div ref = {title} className="title">
             <h3>Selected Projects</h3>

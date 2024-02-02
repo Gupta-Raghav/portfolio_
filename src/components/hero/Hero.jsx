@@ -2,6 +2,7 @@
 import React from 'react'
 import './Hero.css'
 import Icons from './icons'
+import { Link } from 'react-scroll';
 
 function Hero() {
   return (
@@ -12,7 +13,7 @@ function Hero() {
             </div>
             <div className='hero-main'>
               <h1>Developing</h1>
-              <h1>Good Shit</h1> {/* Correct capitalization if needed */}
+              <h1>Good Stuff</h1> {/* Correct capitalization if needed */}
               <h1>Since</h1>
               <h1>2020</h1>
             </div> 
@@ -25,6 +26,7 @@ function Hero() {
                 <p>
                   Seeking full time SWE roles
                 </p>
+                <Link to='About'smooth={true} duration={850}><div className='scroll-button'><h4>Scroll Down</h4> <h5>To discover</h5></div></Link>
             </div>
     </div>
   )

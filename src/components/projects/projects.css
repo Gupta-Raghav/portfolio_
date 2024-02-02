@@ -1,11 +1,13 @@
 .projects {
 background-color: #000;
-
+background-image:
+      repeating-linear-gradient(90deg, rgb(255,255,255,0.1) 0 1px, transparent 1px 100%);
+    background-size: 100px;
 }
 
 .title_container{
     border-bottom: 2px solid #272727;
-    z-index: 6;
+    z-index: 2;
     padding-left: 10%;
     position: sticky;
     display: flex;

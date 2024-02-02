@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './navBar.css';
+import { Link } from 'react-scroll';
 
 function NavBar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,9 +34,9 @@ function NavBar() {
        <div className="container">
 
       <div ref={plane} className="navBody">
-      <a href='#About'> <Text3d primary={"About"} secondary={"About"}/></a>
-          <a href='#About'> <Text3d primary={"Work"} secondary={"Work"}/></a>
-          <a href='#contact'> <Text3d primary={"Contact"} secondary={"Contact"}/></a>
+      <Link to='About'smooth={true} duration={850}><Text3d primary={"About"} secondary={"About"}/></Link>
+      <Link to='projects'smooth={true} duration={850}>  <Text3d primary={"Work"} secondary={"Work"}/></Link>
+          <Link to='contact'smooth={true} duration={850}> <Text3d primary={"Contact"} secondary={"Contact"}/></Link>
       </div>
 
     </div>
