@@ -34,9 +34,9 @@ function NavBar() {
        <div className="container">
 
       <div ref={plane} className="navBody">
-      <Link to='About'smooth={true} duration={850}><Text3d primary={"About"} secondary={"About"}/></Link>
-      <Link to='projects'smooth={true} duration={850}>  <Text3d primary={"Work"} secondary={"Work"}/></Link>
-          <Link to='contact'smooth={true} duration={850}> <Text3d primary={"Contact"} secondary={"Contact"}/></Link>
+      <a href='#About'><Text3d primary={"About"} secondary={"About"}/></a>
+      <a href='#work'>  <Text3d primary={"Work"} secondary={"Work"}/></a>
+          <a href='#contact'> <Text3d primary={"Contact"} secondary={"Contact"}/></a>
       </div>
 
     </div>

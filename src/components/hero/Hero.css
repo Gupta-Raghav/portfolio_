@@ -86,7 +86,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 30px 1px rgba(230 ,230,230,.9 );
+    box-shadow: 0 0 50px 4px rgba(230 ,230,230,.9 );
     font-family: "Fontsfree Net Tg Frekuent Mono Variable 1", sans-serif;
 }
 
@@ -134,7 +134,8 @@
         display: none;
     }
     .hero-footer a{
-    top: 12%;
+    
+    top: 14%;
     left: 30%;
     height: 40px;
     }

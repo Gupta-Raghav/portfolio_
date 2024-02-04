@@ -1,0 +1,47 @@
+.paragraph{
+
+    display: flex;
+  
+    font-size: 3rem;
+
+  
+    line-height: 1;
+  
+    padding: 5px;
+
+    max-width: 1280px;
+  
+    color: white;
+  
+    flex-wrap: wrap;
+  
+    .word{
+      position: relative;  
+      margin-right: 12px;
+      margin-top: 12px;
+      .shadow{
+        position: absolute;
+        opacity: 10%;
+      }
+      &.always-visible{ .shadow { 
+        opacity: 1;// Ensures shadow text is fully visible 
+      }
+      color: var(--text-color);
+    } 
+    } 
+  
+  }
+
+  @media (max-width: 768px) {
+    .paragraph {
+      font-size: 2rem;
+      padding: 2px; 
+      .word {
+        margin-right: 8px; 
+        margin-top: 8px; 
+        .shadow {
+          opacity: 10%;
+        }
+      }
+    }
+  }

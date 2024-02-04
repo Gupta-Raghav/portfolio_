@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './About2.css'
 import LR from '../../Assets/Adobe Lightroom.png'
 import cpp from '../../Assets/C++.png'
@@ -10,9 +10,24 @@ import py from '../../Assets/Python.png'
 import sql from '../../Assets/sql.png'
 import floating1 from '../../Assets/about/gator.jpg';
 import bg from '../../Assets/about/collage.png';
-
+import { useScroll, motion } from 'framer-motion'
+import Character from './Character'
+import Word from './Word'
 
 function About() {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+  target: container,
+  offset: ["start 0.9", "start 0.25"]
+
+})
+const paragraph = "I am a diversely skilled Software Developer with strong focus on developing user friendly and efficient products."
+const words = paragraph.split(" ")
+words.map((word, i)=>{
+  const start = i/words.length
+  const end = start + (1/words.length)
+  return <Word key ={i} progress={scrollYProgress} range={[start,end]}>{word}</Word>
+})
     return (
       <div className="About" id="About">
         <div className='title_container'>
@@ -22,11 +37,9 @@ function About() {
         </div>
         <div className="aboutWrapper">
             <div className="contentAndSkills">
-              <div className="About_content">
-                <p>
-                  <span>I am a diversely skilled <span>Software Developer</span> with strong focus on developing user friendly and efficient products.</span>
-                </p>
-              </div>
+              {/* <motion.div ref={container} className="About_content" style={{opacity: scrollYProgress}}> */}
+              <Character paragraph={paragraph}/>
+              {/* </motion.div> */}
               <div className='skills'>
                 <h2>Skills</h2>
                 <div className='skill-icons'>

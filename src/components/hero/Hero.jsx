@@ -26,7 +26,7 @@ function Hero() {
                 <p>
                   Seeking full time SWE roles
                 </p>
-                <Link to='About'smooth={true} duration={850}><div className='scroll-button'><h4>Scroll Down</h4> <h5>To discover</h5></div></Link>
+                <a href='#About'><div className='scroll-button'><h4>Scroll Down</h4> <h5>To discover</h5></div></a>
             </div>
     </div>
   )

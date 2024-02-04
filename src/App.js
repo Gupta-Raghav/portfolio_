@@ -6,8 +6,21 @@ import Projects from './components/projects/projects';
 import Contact from './components/Contact/contact';
 import Footer from './components/Footer/footer';
 import PreLoader from './components/preloader/preLoader';
+import Work from './components/work/work'
+import Lenis from '@studio-freight/lenis'
+import { useEffect } from 'react';
 
 function App() {
+  // useEffect( () => {
+
+  //   const lenis = new Lenis()
+  //   function raf(time) {
+  //     lenis.raf(time)
+  //     requestAnimationFrame(raf)
+  //   }
+  //   requestAnimationFrame(raf)
+
+  // })
   
   return (
     <>
@@ -16,6 +29,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Work/>
       <Projects />
       <Contact/>
       <Footer/>
