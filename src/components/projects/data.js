@@ -2,9 +2,9 @@ export const projects = [
     {
         title: "Plan paths",
         description: "Worked in a team of two to develop a micro services based application that helps high-school student to plan their paths for the next four years  ",
-        src: "D:/projects/React-projects/portfolio_final/src/Assets/planPaths.png",
+        src: "https://github.com/Gupta-Raghav/portfolio_/raw/main/src/Assets/planPaths.png",
         link: "https://iron-beta.vercel.app/",
-        color: "#CFF07C",
+        color: "#61483f",
         year : "2023",
         brief: "WireFraming, Full Stack development"
     },
