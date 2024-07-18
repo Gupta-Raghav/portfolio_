@@ -1,6 +1,7 @@
 .About {
     background-color: var(--secondaryBG-color); 
     min-height: 80vh;
+
   }
   
   .aboutWrapper {
@@ -11,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px 0 20px 0;
+    padding: 90px 0 20px 0;
     max-width: 85%;
     position: relative;
   }

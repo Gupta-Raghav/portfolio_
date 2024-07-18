@@ -17,6 +17,7 @@
     min-height: 50vh;
 }
 .workCardContainer{
+    background-color: rgba(183,171,152,0.09);
     padding: 10px;
     color: white;
     display: flex;

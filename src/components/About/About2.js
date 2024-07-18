@@ -18,7 +18,7 @@ function About() {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
   target: container,
-  offset: ["start 0.9", "start 0.25"]
+  offset: ["start 1.2", "start 0.01"]
 
 })
 const paragraph = "I am a diversely skilled Software Developer with strong focus on developing user friendly and efficient products."
@@ -55,7 +55,7 @@ words.map((word, i)=>{
               </div>
             </div>
           <div className="pic">
-            <img src={floating1} alt='image' width={300}/>
+            <img src={floating1} alt='image' width={250}/>
           </div>
         </div>
       </div>
