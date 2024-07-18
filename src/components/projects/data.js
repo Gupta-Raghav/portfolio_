@@ -1,11 +1,20 @@
 export const projects = [
     {
+        title: "Sync dev",
+        description: "Sync-Dev is an innovative platform designed to enhance syncing and collaboration for developers. It helps developers to really catch up ASAP.",
+        src: "../../Assets/syncDev.png",
+        link: "https://sync-dev.vercel.app/",
+        color: "#69537A",
+        year : "2024",
+        brief: "Next js, Full stack"
+    },
+    {
         title: "Plan paths",
-        description: "Worked in a team of two to develop a micro services based application that helps high-school student to plan their paths for the next four years  ",
+        description: "Collaborated within a two-member team to develop a microservices-based application designed to assist high school students in planning their academic paths over the next four years.",
         src: "https://github.com/Gupta-Raghav/portfolio_/raw/main/src/Assets/planPaths.png",
         link: "https://iron-beta.vercel.app/",
-        color: "#61483f",
-        year : "2023",
+        color: "#a3a29a",
+        year : "2024",
         brief: "WireFraming, Full Stack development"
     },
     // {
@@ -17,16 +26,16 @@ export const projects = [
     //     year : "2023",
     //     brief: "Wire Framing, Figma, Redesign"
     // },
-    {
-        title: "Poly Rythms",
-        description: "I crafted a web application that explores the intricate interplay of multiple rhythms that do not conform to a single meter. This project, built entirely with vanilla JavaScript, demanded a deep dive into mathematical concepts to accurately model the simultaneous execution of diverse rhythmic patterns.",
-        src: "https://github.com/Gupta-Raghav/portfolio_/raw/main/src/Assets/Poly.webp",
-        link: "https://musical-lolly-a2b386.netlify.app/",
-        color: "#CAD5D1",
-        year : "2022",
-        brief: "Vanilla Javascript"
+    // {
+    //     title: "Poly Rythms",
+    //     description: "I crafted a web application that explores the intricate interplay of multiple rhythms that do not conform to a single meter. This project, built entirely with vanilla JavaScript, demanded a deep dive into mathematical concepts to accurately model the simultaneous execution of diverse rhythmic patterns.",
+    //     src: "https://github.com/Gupta-Raghav/portfolio_/raw/main/src/Assets/Poly.webp",
+    //     link: "https://musical-lolly-a2b386.netlify.app/",
+    //     color: "#CAD5D1",
+    //     year : "2022",
+    //     brief: "Vanilla Javascript"
 
-    },
+    // },
     {
         title: "Event management system for Manipal University Jaipur",
         description: "Built an event management system for Manipal University Jaipur incorporating React JS, Firebase, reducing permission processing time by 90% and serving 5000+ students, 10 departments, and 150 faculty.",

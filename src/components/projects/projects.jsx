@@ -22,7 +22,7 @@ function Projects() {
     <div ref={ container} className='projects' id="projects">
         <div className='title_container'>
         <div ref = {title} className="title">
-            <h3>Selected Projects</h3>
+            <h3>Top Work</h3>
         </div>
         </div>
         {
