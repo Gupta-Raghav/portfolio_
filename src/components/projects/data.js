@@ -2,7 +2,7 @@ export const projects = [
     {
         title: "Sync dev",
         description: "Sync-Dev is an innovative platform designed to enhance syncing and collaboration for developers. It helps developers to really catch up ASAP.",
-        src: "../../Assets/syncDev.png",
+        src: "https://github.com/Gupta-Raghav/portfolio_/raw/main/src/Assets/syncDev.png",
         link: "https://sync-dev.vercel.app/",
         color: "#69537A",
         year : "2024",
