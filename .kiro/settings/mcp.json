@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github@latest"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "duckduckgo": {
+      "command": "npx",
+      "args": ["@nickclyde/duckduckgo-mcp-server"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

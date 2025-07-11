@@ -21,10 +21,10 @@ function Hero() {
             <Icons/>
             <div className='hero-footer'>
             <p>
-                  Software Developer
+                  Software Engineer @ Amazon (Kiro)
                 </p>
                 <p>
-                  Seeking full time SWE roles
+                  Cross-Platform Development & AI Integration Specialist
                 </p>
                 <a href='#About'><div className='scroll-button'><h4>Scroll Down</h4> <h5>To discover</h5></div></a>
             </div>
