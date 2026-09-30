@@ -22,9 +22,57 @@
 .hero-content {
     position: absolute;
     top: 35%;
-    left: 43%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     text-align: center;
+    width: fit-content;
+    max-width: 90vw;
 }
+
+.hero-lede {
+    margin: 22px auto 0;
+    max-width: 42ch;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--secondary-color);
+}
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 26px;
+    position: relative;
+    z-index: 2;
+}
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: #f2ede6;
+    color: #0d0c0b;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), background .3s;
+}
+.hero-btn:hover { transform: translateY(-2px); background: #fff; }
+.hero-btn .arrow { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.hero-btn:hover .arrow { transform: translateX(3px); }
+.ghost-dot { width: 20px; height: 20px; flex: none; }
+.hero-link {
+    color: var(--secondary-color);
+    font-size: 15px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 3px;
+    transition: color .2s, border-color .2s;
+}
+.hero-link:hover { color: var(--text-color); border-color: var(--text-color); }
 
 .hero-heading {
     color: var(--secondary-color);
@@ -63,7 +111,10 @@
 .hero-footer a{
     position: absolute;
     bottom: 4%;
-    left: 48%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
     text-decoration: none;
     color: black;
 }
@@ -111,10 +162,10 @@
     bottom: 5%;
     right: 6%;
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .hero {
         background-image: url('../../Assets/RG_mobile1.jpg');
-        
+        background-position: center top;
     }
     .hero-heading {
         font-size: 20px;
@@ -128,15 +179,17 @@
         font-size: 35px;
     }
     .hero-footer p{
-        font-size: 15px;
+        font-size: 14px;
+        left: 6% !important;
+        right: 6% !important;
+        text-align: center;
     }
+    .hero-footer p:nth-child(1) { bottom: 14%; }
     .icon-set{
         display: none;
     }
     .hero-footer a{
-    
-    top: 14%;
-    left: 30%;
-    height: 40px;
+    bottom: 2%;
     }
+    .scroll-button{ height: 40px; }
 }

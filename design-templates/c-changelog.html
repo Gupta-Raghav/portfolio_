@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Template C: Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Fragment+Mono&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #0a090d; --line: #26222c; --muted: #938f9b; --fg: #f3f1f6; --purple: #9046ff; --lilac: #c2a0fd; --mint: #80ffb5; --sky: #8dc8fb; --pink: #ffafd1; --peach: #ffcf99; --yellow: #fff2b3; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: "Fragment Mono", ui-monospace, monospace; }
+  .serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+  header { position: relative; min-height: 92dvh; padding: 8vh 6vw; display: grid; grid-template-columns: 7fr 5fr; align-items: center; border-bottom: 1px solid var(--line); overflow: hidden; }
+  #orb { position: absolute; right: -6vw; top: 50%; transform: translateY(-50%); width: 58vw; height: 58vw; max-height: 110%; }
+  .top { position: absolute; top: 28px; left: 6vw; right: 6vw; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .top b { color: var(--fg); font-weight: 500; }
+  h1 { position: relative; font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.02em; }
+  h1 i { color: var(--lilac); }
+  .lede { position: relative; margin-top: 36px; color: var(--muted); max-width: 44ch; line-height: 1.6; font-size: 17px; }
+  .strip { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; border-bottom: 1px solid var(--line); }
+  .strip div { padding: 36px 6vw 36px 32px; border-right: 1px solid var(--line); }
+  .strip div:first-child { padding-left: 6vw; }
+  .strip div:last-child { border-right: 0; }
+  .strip b { font-size: 40px; font-weight: 400; display: block; letter-spacing: -0.02em; }
+  .strip span { font-size: 12px; color: var(--muted); }
+  .year { display: grid; grid-template-columns: 3fr 9fr; border-bottom: 1px solid var(--line); }
+  .year .label { padding: 56px 6vw; position: sticky; top: 0; align-self: start; }
+  .year .label h2 { font-size: 88px; line-height: 1; color: var(--lilac); }
+  .year .label p { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .entries { border-left: 1px solid var(--line); }
+  .entry { display: grid; grid-template-columns: 120px 1fr 160px; gap: 32px; padding: 32px 6vw 32px 40px; border-bottom: 1px solid var(--line); transition: background .3s; }
+  .entry:hover { background: #121016; }
+  .entry:last-child { border-bottom: 0; }
+  .chip { font-size: 11px; padding: 4px 10px; border-radius: 999px; height: fit-content; width: fit-content; color: #0b0a0e; }
+  .feat { background: var(--mint); } .fix { background: var(--peach); } .refactor { background: var(--sky); } .platform { background: var(--pink); }
+  .entry h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .entry p { color: var(--muted); line-height: 1.6; margin-top: 8px; max-width: 62ch; }
+  .entry .area { font-size: 12px; color: var(--muted); text-align: right; }
+  footer { padding: 12vh 6vw; display: flex; justify-content: space-between; align-items: end; }
+  footer h2 { font-size: clamp(40px, 5vw, 80px); line-height: 1; }
+  footer a { color: var(--fg); font-size: 14px; border-bottom: 1px solid var(--lilac); text-decoration: none; padding-bottom: 4px; }
+  @media (max-width: 900px) { header, .year, .strip { grid-template-columns: 1fr; } .entry { grid-template-columns: 1fr; gap: 12px; } .entry .area { text-align: left; } .entries { border-left: 0; } #orb { width: 80vw; height: 80vw; right: -24vw; top: 38%; opacity: .55; } .year .label { position: static; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="top mono"><b>Raghav Gupta</b><span>Kiro, agent runtime, 2024 to now</span></div>
+  <canvas id="orb" aria-hidden="true"></canvas>
+  <div>
+    <h1 class="serif">Changelog of a <i>ghost</i> whisperer.</h1>
+    <p class="lede">What I shipped on Kiro, written as release notes. The how is here. The internals stay internal.</p>
+  </div>
+</header>
+<section class="strip mono">
+  <div><b class="serif">200+</b><span>merged changes across agent, IDE and desktop</span></div>
+  <div><b class="serif">3</b><span>operating systems</span></div>
+  <div><b class="serif">~1k</b><span>chars per large tool response, down from 50k+</span></div>
+  <div><b class="serif">0</b><span>rows ever rewritten in a session log</span></div>
+</section>
+
+<section class="year">
+  <div class="label"><h2 class="serif">2026</h2><p class="mono">agent runtime</p></div>
+  <div class="entries">
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Memory that refuses secrets</h3><p>Local cross-session memory with a scan on every write. Credential-shaped strings are blocked before they reach disk.</p></div><span class="area mono">memory</span></div>
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Large tool output offloading</h3><p>Oversized output moves to a session file; the model keeps head, tail, and a path to grep. Graduated from experiment to default.</p></div><span class="area mono">context</span></div>
+    <div class="entry"><span class="chip refactor mono">refactor</span><div><h3>One summarization path</h3><p>Manual compact and automatic compaction now share the cache-preserving path, and a whole legacy module is gone.</p></div><span class="area mono">context</span></div>
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Revert through summarization</h3><p>Two-phase tombstone resolution, so undo still finds the right message after the conversation was compacted.</p></div><span class="area mono">checkpoints</span></div>
+    <div class="entry"><span class="chip fix mono">fix</span><div><h3>Revert restores deletes and renames</h3><p>Per-file snapshots for multi-file renames, and deleted files come back on revert.</p></div><span class="area mono">checkpoints</span></div>
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Reasoning effort controls</h3><p>Pick a model, then set how hard it thinks.</p></div><span class="area mono">models</span></div>
+  </div>
+</section>
+<section class="year">
+  <div class="label"><h2 class="serif">2025</h2><p class="mono">IDE and platform</p></div>
+  <div class="entries">
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Images in spec generation</h3><p>Drop a mockup into chat and Kiro writes the spec from it.</p></div><span class="area mono">specs</span></div>
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Tree-sitter code intelligence</h3><p>Syntax-aware repo maps without waiting on a language server.</p></div><span class="area mono">intelligence</span></div>
+    <div class="entry"><span class="chip platform mono">platform</span><div><h3>Kiro on Windows</h3><p>Path normalization, CRLF handling, and URI encoding fixes that made file edits reliable on Windows.</p></div><span class="area mono">windows</span></div>
+    <div class="entry"><span class="chip platform mono">platform</span><div><h3>Shell-aware command execution</h3><p>bash, zsh and PowerShell detection, correct quoting, OS-specific delimiters.</p></div><span class="area mono">terminal</span></div>
+  </div>
+</section>
+<section class="year">
+  <div class="label"><h2 class="serif">2024</h2><p class="mono">desktop</p></div>
+  <div class="entries">
+    <div class="entry"><span class="chip platform mono">platform</span><div><h3>Linux packaging and smoke tests</h3><p>Debian packages, separate manifests per format, automated smoke runs.</p></div><span class="area mono">linux</span></div>
+    <div class="entry"><span class="chip feat mono">feat</span><div><h3>Remote development over SSH</h3><p>Built-in remote workflows out of the box.</p></div><span class="area mono">remote</span></div>
+  </div>
+</section>
+<footer><h2 class="serif">Built with Kiro,<br/>about Kiro.</h2><a class="mono" href="#">Back to portfolio</a></footer>
+
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }</script>
+<script type="module">
+  import * as THREE from 'three';
+  const canvas = document.getElementById('orb');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100); camera.position.z = 6;
+  const uniforms = { uTime: { value: 0 }, uA: { value: new THREE.Color('#9046ff') }, uB: { value: new THREE.Color('#c2a0fd') }, uC: { value: new THREE.Color('#ffafd1') } };
+  const noise = `vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}vec4 perm(vec4 x){return mod289(((x*34.)+1.)*x);}
+  float snoise(vec3 v){const vec2 C=vec2(1./6.,1./3.);vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;vec3 i1=min(g,l.zxy);vec3 i2=max(g,l.zxy);vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-.5;i=mod289(i);vec4 p=perm(perm(perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));vec4 j=p-49.*floor(p*(1./49.));vec4 x_=floor(j*(1./7.));vec4 y_=floor(j-7.*x_);vec4 x=(x_*2.+.5)/7.-1.;vec4 y=(y_*2.+.5)/7.-1.;vec4 h=1.-abs(x)-abs(y);vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;vec4 sh=-step(h,vec4(0.));vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);m=m*m;return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}`;
+  const mat = new THREE.ShaderMaterial({ uniforms, transparent: true,
+    vertexShader: noise + `uniform float uTime; varying float vN; varying vec3 vNorm;
+      void main(){ float n = snoise(normal*1.4 + uTime*.25); vN = n; vNorm = normalize(normalMatrix*normal);
+      vec3 p = position + normal * n * .28; gl_Position = projectionMatrix * modelViewMatrix * vec4(p,1.); }`,
+    fragmentShader: `uniform vec3 uA; uniform vec3 uB; uniform vec3 uC; varying float vN; varying vec3 vNorm;
+      void main(){ float f = pow(1. - abs(dot(vNorm, vec3(0.,0.,1.))), 2.2);
+      vec3 col = mix(uA, uB, smoothstep(-.4,.6,vN)); col = mix(col, uC, smoothstep(.55,.9,vN)*.5);
+      col *= .7 + f*.9; col = mix(col, vec3(1.), f*.25); gl_FragColor = vec4(col, 1.);
+      #include <colorspace_fragment>
+      }` });
+  const orb = new THREE.Mesh(new THREE.IcosahedronGeometry(1.15, 64), mat); scene.add(orb);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let sy = 0; addEventListener('scroll', () => { sy = scrollY; }, { passive: true });
+  function resize() { const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+  addEventListener('resize', resize); resize();
+  const clock = new THREE.Clock();
+  (function tick() { if (!reduce) uniforms.uTime.value = clock.getElapsedTime(); orb.rotation.y = sy * .002; orb.rotation.x = sy * .001; renderer.render(scene, camera); requestAnimationFrame(tick); })();
+</script>
+</body>
+</html>

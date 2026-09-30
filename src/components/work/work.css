@@ -53,8 +53,9 @@
 .workDescription ul li{
     line-height: 1.4;
 }
-@media (max-width: 768px) {
-    .workTitle p{
-        width: 110px;
-    }
+@media (max-width: 900px) {
+    .workcards { margin: 0 6vw; padding-top: 48px; }
+    .workTitle { flex-wrap: wrap; gap: 4px 12px; padding-bottom: 6px; }
+    .workTitle h2 { font-size: 1.2rem; }
+    .workDescription { padding: 12px 8px 12px 20px; }
 }

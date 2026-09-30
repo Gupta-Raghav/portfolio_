@@ -18,10 +18,10 @@ function About() {
     offset: ["start 1.2", "start 0.01"],
   });
   const paragraph =
-    "I am a Software Developer at Amazon (Kiro) with expertise in cross-platform development, AI integration, and scalable system architecture. I've led technical initiatives that improved product reliability by 2% and enabled platform expansion to 1,654+ Windows users, demonstrating measurable business impact through innovative engineering solutions.";
+    "I am a Software Developer at Amazon (Kiro) with expertise in cross-platform development, AI integration, and scalable system architecture. I build the agent runtime behind Kiro: how it remembers, how it undoes, and how it runs on every platform.";
 
   return (
-    <div className="About" id="About">
+    <div className="About" id="about">
       <div className="title_container">
         <div className="title">
           <h3>About</h3>

@@ -59,10 +59,10 @@
   }
   
   .pic img {
-    width: 450px;
+    width: min(450px, 32vw);
   }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .pic {
         display: none;
     }
@@ -74,8 +74,10 @@
         padding: 0;
     }
     .aboutWrapper {
-        padding: 0;
-        height: 80vh;
+        padding: 96px 0 64px;
+        margin: 0 6vw;
+        max-width: none;
+        background-size: 25vw;
     }
     .About_content p{
         margin: 50px 5% 0;

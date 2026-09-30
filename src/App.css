@@ -25,6 +25,8 @@ body::-webkit-scrollbar {
 html{
     scroll-behavior: smooth;
 }
+html, body { overflow-x: clip; }
+img { max-width: 100%; }
 
 /* .App {
     overflow-y: hidden;

@@ -26,7 +26,7 @@ background-image:
 .projects::-webkit-scrollbar {
     display: none;
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .title_container{
         padding-left: 5%;
         

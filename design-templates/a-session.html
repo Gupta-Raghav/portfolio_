@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Template A: Session transcript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0a0e; --panel: #131118; --line: #28242e; --muted: #938f9b; --dim: #4a464f;
+    --fg: #f2f0f5; --purple: #9046ff; --lilac: #c2a0fd; --mint: #80ffb5; --sky: #8dc8fb; --peach: #ffcf99;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: "Fragment Mono", ui-monospace, monospace; }
+  nav { position: fixed; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; z-index: 5; background: linear-gradient(var(--bg), transparent); }
+  nav .brand { display: flex; gap: 10px; align-items: center; font-weight: 500; }
+  nav .brand svg { width: 22px; height: 22px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; margin-left: 28px; }
+  .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: 100dvh; }
+  .stage { position: sticky; top: 0; height: 100dvh; border-right: 1px solid var(--line); overflow: hidden; }
+  #ghost { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .stage .caption { position: absolute; left: 40px; bottom: 40px; right: 40px; }
+  .stage h1 { font-size: clamp(34px, 3.6vw, 54px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.02; max-width: 12ch; }
+  .stage p { color: var(--muted); margin-top: 16px; max-width: 38ch; line-height: 1.55; }
+  .stats { display: flex; gap: 32px; margin-top: 28px; }
+  .stats b { display: block; font-size: 28px; font-weight: 500; }
+  .stats span { font-size: 12px; color: var(--muted); }
+  .feed { padding: 120px 56px 120px; display: flex; flex-direction: column; gap: 56px; }
+  .turn { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .turn.in { opacity: 1; transform: none; }
+  .prompt { display: flex; gap: 12px; align-items: baseline; color: var(--lilac); font-size: 14px; }
+  .prompt::before { content: ">"; color: var(--dim); }
+  .reply { margin-top: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 28px; }
+  .reply h2 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .reply p { color: var(--muted); line-height: 1.6; margin-top: 10px; max-width: 60ch; }
+  .steps { margin-top: 20px; display: grid; gap: 8px; font-size: 13px; }
+  .steps div { display: flex; gap: 10px; align-items: center; color: #cfcbd6; }
+  .steps i { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); flex: none; }
+  .tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); margin-right: 6px; margin-top: 18px; }
+  .tag.ok { color: var(--mint); border-color: #2b4a3a; }
+  nav .brand { white-space: nowrap; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .stage { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding-top: 64px; }
+    #ghost { position: relative; height: 46dvh; }
+    .stage .caption { position: static; padding: 0 20px 40px; }
+    .feed { padding: 48px 20px; } nav { padding: 16px 20px; } nav > div:last-child { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .turn { transition: none; opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand"><svg viewBox="0 0 1200 1200"><rect width="1200" height="1200" rx="260" fill="#9046FF"/><path fill="#fff" d="M398.554 818.914C316.315 1001.03 491.477 1046.74 620.672 940.156C658.687 1059.66 801.052 970.473 852.234 877.795C964.787 673.567 919.318 465.357 907.64 422.374C827.637 129.443 427.623 128.946 358.8 423.865C342.651 475.544 342.402 534.18 333.458 595.051C328.986 625.86 325.507 645.488 313.83 677.785C306.873 696.424 297.68 712.819 282.773 740.645C259.915 783.881 269.604 867.113 387.87 823.883Z"/></svg>Raghav Gupta / Kiro</div>
+  <div><a href="#">Portfolio</a><a href="#">Work</a><a href="#">Contact</a></div>
+</nav>
+<div class="layout">
+  <aside class="stage">
+    <canvas id="ghost" aria-hidden="true"></canvas>
+    <div class="caption">
+      <h1>The parts of Kiro that remember.</h1>
+      <p>Two years on Kiro, the agentic IDE. I work on the agent runtime: checkpoints, context, memory, and the plumbing that keeps long sessions sharp.</p>
+      <div class="stats"><div><b>200+</b><span>merged changes</span></div><div><b>3</b><span>platforms shipped</span></div><div><b>2024</b><span>on Kiro since</span></div></div>
+    </div>
+  </aside>
+  <main class="feed">
+    <section class="turn"><div class="prompt mono">undo everything since I asked for that refactor</div>
+      <div class="reply"><h2>Checkpoints and revert</h2>
+        <p>Every file write takes a snapshot first. Snapshots are content-addressed, so ten edits to the same file cost one copy. Revert walks the conversation back, restores each file to its first pre-change state, and records the undo as an append-only entry instead of rewriting history.</p>
+        <div class="steps mono"><div><i></i>snapshot before write, hash-deduplicated</div><div><i></i>multi-file renames restore file by file</div><div><i></i>works across sub-agents and after summarization</div></div>
+        <span class="tag ok mono">shipped</span><span class="tag mono">agent runtime</span></div></section>
+    <section class="turn"><div class="prompt mono">why did the agent forget what we were doing?</div>
+      <div class="reply"><h2>Context summarization</h2>
+        <p>The agent projects context usage before tool results land, not after. When it crosses a threshold it compacts the session into a task-oriented summary, reusing the prompt cache so compaction costs close to a normal turn.</p>
+        <div class="steps mono"><div><i></i>proactive projection, not reactive overflow</div><div><i></i>cache-preserving summary path first</div><div><i></i>manual /compact routed through the same path</div></div>
+        <span class="tag ok mono">shipped</span><span class="tag mono">context</span></div></section>
+    <section class="turn"><div class="prompt mono">run the full test suite</div>
+      <div class="reply"><h2>Large tool output handling</h2>
+        <p>A 50k-character test log used to flood the context window. Now oversized output goes to a session file and the model sees the head, the tail, and a path it can grep. Per-response context drops from tens of thousands of characters to about one thousand.</p>
+        <div class="steps mono"><div><i></i>offload above threshold, keep head and tail</div><div><i></i>graduated from experiment to default</div></div>
+        <span class="tag ok mono">shipped</span><span class="tag mono">context</span></div></section>
+    <section class="turn"><div class="prompt mono">remember that I prefer TypeScript</div>
+      <div class="reply"><h2>Local memory with secret scanning</h2>
+        <p>Kiro keeps durable preferences across sessions. Every write is scanned for credential-shaped strings before it touches disk, so a pasted key never becomes a memory.</p>
+        <span class="tag ok mono">shipped</span><span class="tag mono">memory</span></div></section>
+    <section class="turn"><div class="prompt mono">does this work on Windows?</div>
+      <div class="reply"><h2>Cross-platform agent</h2>
+        <p>Path normalization, CRLF handling, shell-aware command execution for bash, zsh and PowerShell, and Linux packaging with smoke tests. Plus Tree-sitter parsing so code intelligence works without a language server.</p>
+        <span class="tag ok mono">shipped</span><span class="tag mono">platform</span></div></section>
+  </main>
+</div>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+  const GHOST = 'M398.554 818.914C316.315 1001.03 491.477 1046.74 620.672 940.156C658.687 1059.66 801.052 970.473 852.234 877.795C964.787 673.567 919.318 465.357 907.64 422.374C827.637 129.443 427.623 128.946 358.8 423.865C342.651 475.544 342.402 534.18 333.458 595.051C328.986 625.86 325.507 645.488 313.83 677.785C306.873 696.424 297.68 712.819 282.773 740.645C259.915 783.881 269.604 867.113 387.87 823.883Z';
+  const EYE_L = 'M636 549C603 549 598 510 598 487C598 466 602 449 609 438C615 429 625 424 636 424C648 424 657 429 664 439C672 449 677 466 677 487C677 526 661 549 636 549Z';
+  const EYE_R = 'M771 549C738 549 733 510 733 487C733 466 737 449 744 438C751 429 760 424 771 424C783 424 793 429 800 439C808 449 812 466 812 487C812 526 797 549 771 549Z';
+  const canvas = document.getElementById('ghost');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  const scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100); camera.position.set(0, 0, 9);
+  const loader = new SVGLoader();
+  const shape = (d) => SVGLoader.createShapes(loader.parse(`<svg><path transform="scale(1,-1)" d="${d}"/></svg>`).paths[0]);
+  const body = new THREE.ExtrudeGeometry(shape(GHOST), { depth: 140, bevelEnabled: true, bevelThickness: 40, bevelSize: 30, bevelSegments: 12, curveSegments: 48 });
+  body.computeBoundingBox();
+  const c = new THREE.Vector3(); body.boundingBox.getCenter(c);
+  body.translate(-c.x, -c.y, -c.z);
+  const group = new THREE.Group();
+  const mat = new THREE.MeshPhysicalMaterial({ color: '#f4efff', roughness: 0.18, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.1, sheen: 1, sheenColor: new THREE.Color('#c2a0fd') });
+  group.add(new THREE.Mesh(body, mat));
+  const eyeMat = new THREE.MeshStandardMaterial({ color: '#141018', roughness: 0.3, side: THREE.DoubleSide });
+  const front = body.boundingBox.max.z; // bbox was recomputed by translate(), already centered
+  [EYE_L, EYE_R].forEach((d) => { const g = new THREE.ExtrudeGeometry(shape(d), { depth: 12, bevelEnabled: false, curveSegments: 24 }); g.translate(-c.x, -c.y, front - 4); group.add(new THREE.Mesh(g, eyeMat)); });
+   group.position.y = 0.9;
+  scene.add(group);
+  const key = new THREE.PointLight('#9046ff', 60, 20); key.position.set(-3, 2, 4); scene.add(key);
+  const rim = new THREE.PointLight('#80ffb5', 25, 20); rim.position.set(3, -2, 2); scene.add(rim);
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(1.5, 64), new THREE.MeshBasicMaterial({ color: '#9046ff', transparent: true, opacity: 0.12 }));
+  floor.rotation.x = -Math.PI / 2; floor.position.y = -1.6; scene.add(floor);
+  const pointer = { x: 0, y: 0 };
+  addEventListener('pointermove', (e) => { pointer.x = e.clientX / innerWidth - 0.5; pointer.y = e.clientY / innerHeight - 0.5; });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize() { const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
+    const s = 0.0042 * Math.min(1, camera.aspect / 0.75); group.scale.set(s, s, s);
+    baseY = innerWidth > 900 ? 0.9 : 0; }
+  let baseY = 0.9;
+  addEventListener('resize', resize); resize();
+  const clock = new THREE.Clock();
+  (function tick() {
+    const t = clock.getElapsedTime();
+    group.rotation.y += ((pointer.x * 0.9) - group.rotation.y) * 0.05;
+    group.rotation.x += ((pointer.y * 0.4) - group.rotation.x) * 0.05;
+    group.position.y = baseY + (reduce ? 0 : Math.sin(t * 1.4) * 0.12);
+    floor.position.y = baseY - 1.85;
+    floor.scale.setScalar(1 - Math.sin(t * 1.4) * 0.06);
+    renderer.render(scene, camera); requestAnimationFrame(tick);
+  })();
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.15 });
+  document.querySelectorAll('.turn').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

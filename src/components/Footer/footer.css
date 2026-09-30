@@ -28,7 +28,7 @@
     display: none;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 901px) {
     .social-media {
         display: none; /* Hide social media links on desktop */
     }

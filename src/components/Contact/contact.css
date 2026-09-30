@@ -54,10 +54,11 @@
 
 
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     .wrapper{
-        margin: 0 10%;
-        height: 70vh;
+        margin: 0 6vw;
+        max-width: none;
+        min-height: 60vh;
         padding: 20px 0 10px 0;
 
     }
@@ -71,9 +72,8 @@
         width: 100%;
     }
 
-    .grid3 a {
-        font-size: 10px; /* Adjust font size for smaller screens */
-    }
+    .grid3 { padding: 48px 16px; box-sizing: border-box; text-align: center; }
+    .grid3 a { font-size: 14px; word-break: break-all; }
 
     .grid3 a::after {
         width: 100%; /* Set a fixed width to disable hover effect */
