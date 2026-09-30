@@ -8,6 +8,7 @@ import github from "../../Assets/GitHub.png";
 import fig from "../../Assets/Figma.png";
 import floating1 from "../../Assets/about/gator.jpg";
 import Character from "./Character";
+import "./Word.scss";
 
 function About() {
   const paragraph =
