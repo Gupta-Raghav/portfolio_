@@ -1,9 +1,6 @@
 import './card.scss';
 import { useTransform, motion, useScroll } from 'framer-motion';
 import { useRef } from 'react';
-import muj from '../../Assets/MUJ.webp';
-import poly from '../../Assets/Poly.webp';
-import lprc from '../../Assets/LPRC.webp';
 import share from '../../Assets/link.svg' 
 // const images = [lprc,poly,muj]
 
@@ -32,7 +29,7 @@ const Card = ({i, title, description, src, link, color,year,brief, progress, ran
         </div>
         <div className='title'>
         <h1>{title}</h1>
-        <a href={link} target='_blank'> <motion.img 
+        <a href={link} target='_blank' rel='noreferrer' aria-label={`Open ${title}`}> <motion.img 
           src={share}
           alt=''
           style={{rotate}}
@@ -51,7 +48,7 @@ const Card = ({i, title, description, src, link, color,year,brief, progress, ran
             >
               <img
                 src={src}
-                alt="image" 
+                alt={title} 
               />
             </motion.div>
           </div>

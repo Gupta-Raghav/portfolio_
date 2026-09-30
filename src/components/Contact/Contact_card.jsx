@@ -32,7 +32,6 @@ const CardComponent = () => {
       <div className="contactCard">
         <div className="contactCard-content">
           <h3 className="contactCard-title">Let's connect</h3>
-          <h4 className="contactCard-subtitle"></h4>
             <p className="contactCard-inspire"></p>
         </div>
       </div>

@@ -2,7 +2,6 @@
 import React from 'react'
 import './Hero.css'
 import Icons from './icons'
-import { Link } from 'react-scroll';
 
 function Hero() {
   return (

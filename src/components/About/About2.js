@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./About2.css";
 import react from "../../Assets/React.png";
 import js from "../../Assets/JavaScript.png";
@@ -7,16 +7,9 @@ import py from "../../Assets/Python.png";
 import github from "../../Assets/GitHub.png";
 import fig from "../../Assets/Figma.png";
 import floating1 from "../../Assets/about/gator.jpg";
-import { useScroll } from "framer-motion";
 import Character from "./Character";
-import Word from "./Word";
 
 function About() {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start 1.2", "start 0.01"],
-  });
   const paragraph =
     "I am a Software Developer at Amazon (Kiro) with expertise in cross-platform development, AI integration, and scalable system architecture. I build the agent runtime behind Kiro: how it remembers, how it undoes, and how it runs on every platform.";
 

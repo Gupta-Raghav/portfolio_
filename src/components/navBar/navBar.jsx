@@ -3,7 +3,7 @@ import './navBar.css';
 import { Link } from 'react-scroll';
 
 function NavBar() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [, setIsHovered] = useState(false);
 
   const handleHover = () => {
     setIsHovered(true);

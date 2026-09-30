@@ -1,15 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './contact.css'
 import CardComponent from './Contact_card';
 function Contact() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('')
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Handle form submission, e.g., send data to a server or display it
-        console.log({ name, email, message });
-    };
   return (
     <div className="contact" id="contact">
          <div className='title_container'>

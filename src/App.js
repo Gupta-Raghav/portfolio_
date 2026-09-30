@@ -7,8 +7,6 @@ import Contact from './components/Contact/contact';
 import Footer from './components/Footer/footer';
 import PreLoader from './components/preloader/preLoader';
 import Work from './components/work/work'
-import Lenis from '@studio-freight/lenis'
-import { useEffect } from 'react';
 
 function App() {
   // useEffect( () => {
