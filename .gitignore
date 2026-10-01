@@ -24,3 +24,10 @@ yarn-error.log*
 
 # Kiro settings with potential secrets
 .kiro/settings/
+
+# photo originals stay local; web exports live in public/photography
+/src/Assets/Photography/
+/600
+/Photos 
+/Raghav-Q3-2026.docx
+/.kiro/
