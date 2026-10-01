@@ -104,6 +104,12 @@
     height: 30px;
     width: auto;
 }
+.icon-set .icon-camera svg {
+    display: block;
+    height: 34px;
+    width: 34px;
+    margin-left: -2px;
+}
 
 .hero-footer {
     color: var(--redsecondary-color);
