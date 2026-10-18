@@ -1,0 +1,14 @@
+{
+  "name": "morrow-interface-checks",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test state.test.mjs",
+    "test:browser": "node browser.test.cjs",
+    "serve": "node serve.cjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "playwright": "1.58.2"
+  }
+}
