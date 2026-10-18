@@ -60,3 +60,14 @@ test('stored collections and user text are bounded', () => {
   assert.equal(loaded.workspaces.raghav.notes.length, 100);
   assert.equal(loaded.workspaces.raghav.notes[0].body.length, 10000);
 });
+
+test('Guest display name migrates to Ananya without losing the second workspace', () => {
+  const state = freshState();
+  state.names.guest = 'Guest'; state.profile = 'guest';
+  state.workspaces.guest.notes.push({ id: 'kept', title: 'Our trip', body: 'Keep this.' });
+  const loaded = restoreState(JSON.stringify(state));
+  assert.equal(loaded.names.guest, 'Ananya');
+  assert.equal(loaded.profile, 'guest');
+  assert.deepEqual(loaded.workspaces.guest.notes, state.workspaces.guest.notes);
+  assert.equal(freshState().names.guest, 'Ananya');
+});

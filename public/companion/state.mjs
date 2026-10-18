@@ -1,7 +1,12 @@
 // Local prototype data only. No requests, credentials, or background agent work.
 export const STORAGE_KEY = 'morrow.prototype.v1';
 export const PROFILES = ['raghav', 'guest'];
-export const DEFAULT_NAMES = { raghav: 'Raghav', guest: 'Guest' };
+export const DEFAULT_NAMES = { raghav: 'Raghav', guest: 'Ananya' };
+// Keep the existing storage key and workspace IDs so neither person loses saved data.
+const profileName = (id, value) => {
+  const name = typeof value === 'string' ? value.trim().slice(0, 32) : '';
+  return !name || (id === 'guest' && name === 'Guest') ? DEFAULT_NAMES[id] : name;
+};
 export const uid = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 export const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 export const ARTIFACTS = [
@@ -53,7 +58,7 @@ export function restoreState(raw) {
     if (PROFILES.includes(input.profile)) state.profile = input.profile;
     if (input.theme === 'dark') state.theme = 'dark';
     for (const id of PROFILES) {
-      state.names[id] = text(input.names?.[id], 32).trim() || DEFAULT_NAMES[id];
+      state.names[id] = profileName(id, input.names?.[id]);
       const source = input.workspaces?.[id];
       if (!plain(source)) continue;
       const workspace = state.workspaces[id];
@@ -82,5 +87,5 @@ export function artifactForPrompt(prompt) {
 }
 export function demoReply(prompt) {
   const artifact = artifactForPrompt(prompt);
-  return { role: 'assistant', text: 'This is a local preview, so I haven’t sent your message to an AI or started any work. To show how a conversation could feel, here’s a sample from the artifact library you can explore. Your message stays in this browser.', artifact };
+  return { role: 'assistant', text: 'This is a local preview, so I haven’t sent your message to an AI or started any work. To show how a conversation could feel, here’s a sample from the artifact library you can explore. Your message is saved only to your own private workspace.', artifact };
 }

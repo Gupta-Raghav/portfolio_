@@ -31,9 +31,30 @@ export const ICONS = {
   external: '<path d="M14 3h7v7m0-7L10 14M10 3H3v18h18v-7"/>'
 };
 export function icon(name, cls = '') { return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ICONS.spark}</svg>`; }
+// Hand-drawn vector renditions, referenced from the official milkmochabear.com store.
+// The owner explicitly assigns Milk to Raghav and Mocha to Ananya.
 export function avatar(profile, cls = '') {
-  const female = profile === 'guest';
-  return `<svg class="avatar ${cls}" viewBox="0 0 80 80" aria-hidden="true"><defs><clipPath id="face-${profile}-${cls}"><circle cx="40" cy="40" r="39"/></clipPath></defs><g clip-path="url(#face-${profile}-${cls})"><path fill="${female ? '#ecddd9' : '#dce5db'}" d="M0 0h80v80H0z"/>${female ? '<path d="M16 51V30C16 0 65 0 65 32v35H16Z" fill="#513b35"/>' : ''}<path d="M10 83c0-20 12-29 30-29s30 9 30 29" fill="${female ? '#aa756c' : '#65796b'}"/><path d="M33 48h14v14c-3 5-11 5-14 0" fill="#e4a98c"/><ellipse cx="40" cy="34" rx="21" ry="25" fill="#f0bf9e"/><ellipse cx="20" cy="37" rx="4" ry="6" fill="#edb295"/><ellipse cx="60" cy="37" rx="4" ry="6" fill="#edb295"/>${female ? '<path d="M19 33c-5-24 24-34 37-16 4 4 6 13 5 17-7-3-14-12-17-18-5 9-16 14-25 17Z" fill="#513b35"/><path d="m58 23 2 27 6 17c-3-16 7-39-8-44Z" fill="#513b35"/><path d="m54 21 8 3" stroke="#e8bd78" stroke-width="4" stroke-linecap="round"/>' : '<path d="M19 32c-8-17 3-30 15-26 15-8 33 4 29 19l-5 9-4-15c-11 7-17-3-23 4-4 5-8 5-12 9Z" fill="#3d3833"/>'}<path d="M29 34v4m22-4v4" stroke="#42332c" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="26" cy="43" rx="5" ry="2.8" fill="#e79384" opacity=".55"/><ellipse cx="54" cy="43" rx="5" ry="2.8" fill="#e79384" opacity=".55"/><path d="M35 46q5 6 10 0" fill="none" stroke="#9c5e4d" stroke-width="2" stroke-linecap="round"/><path d="m22 69 7-5m29 5-7-5" stroke="${female ? '#d5a49a' : '#9fb3a4'}" stroke-width="3" stroke-linecap="round"/></g></svg>`;
+  const mocha = profile === 'guest';
+  const coat = mocha ? '#cc9967' : '#fffdf8';
+  const outline = mocha ? '#976740' : '#c4b9ae';
+  const blush = mocha ? '#dc8f7d' : '#efb4b0';
+  return `<svg class="avatar ${cls}" data-character="${mocha ? 'mocha' : 'milk'}" viewBox="0 0 80 80" aria-hidden="true">
+    <circle cx="40" cy="40" r="39" fill="${mocha ? '#eee0d4' : '#e3e9df'}"/>
+    <ellipse cx="40" cy="71" rx="25" ry="6" fill="${mocha ? '#dbc8b5' : '#cfd8c9'}" opacity=".65"/>
+    <g stroke="${outline}" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M23 51c-7 8-8 19-3 23 4 4 10 1 12-1 5 2 11 2 16 0 3 3 10 5 13 0 3-5 1-15-5-22" fill="${coat}"/>
+      <circle cx="22" cy="22" r="10" fill="${coat}"/><circle cx="58" cy="22" r="10" fill="${coat}"/>
+      <path d="M14 39c0-16 9-23 26-23s26 7 26 23c3 13-8 23-26 23S11 52 14 39Z" fill="${coat}"/>
+    </g>
+    <ellipse cx="40" cy="47" rx="12" ry="9" fill="${mocha ? '#f1d8b9' : '#fffdf8'}"/>
+    <ellipse cx="29" cy="39" rx="2.1" ry="2.8" fill="#513c32"/><ellipse cx="51" cy="39" rx="2.1" ry="2.8" fill="#513c32"/>
+    <ellipse cx="22" cy="46" rx="5" ry="3.2" fill="${blush}" opacity=".9"/><ellipse cx="58" cy="46" rx="5" ry="3.2" fill="${blush}" opacity=".9"/>
+    <path d="M37 44q3-2 6 0-1 4-3 4t-3-4Z" fill="#513c32"/>
+    <path d="M40 47v3m0-1q-3 5-6 1m6-1q3 5 6 1" fill="none" stroke="#513c32" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M40 69s-10-5-10-10c0-5 7-6 10-1 3-5 10-4 10 1 0 5-10 10-10 10Z" fill="${mocha ? '#9b665a' : '#ba7c76'}"/>
+    <ellipse cx="28" cy="62" rx="5" ry="7" transform="rotate(-24 28 62)" fill="${coat}" stroke="${outline}" stroke-width="1.4"/>
+    <ellipse cx="52" cy="62" rx="5" ry="7" transform="rotate(24 52 62)" fill="${coat}" stroke="${outline}" stroke-width="1.4"/>
+  </svg>`;
 }
 export function brand() { return '<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><ellipse cx="15" cy="13" rx="7" ry="11" transform="rotate(-32 15 13)"/><ellipse cx="27" cy="23" rx="7" ry="12" transform="rotate(32 27 23)"/><ellipse cx="13" cy="28" rx="7" ry="8"/></g></svg>'; }
 export function orb(cls = '') { return `<span class="orb ${cls}" aria-hidden="true"><span class="orb-face"><i></i><i></i><b></b></span></span>`; }

@@ -1,90 +1,63 @@
-# Morrow: personal companion frontend
+# Cocoa: a personal space for two
 
-A self-contained, mobile-first companion at `/companion/`, added without changing the portfolio’s React entry point, photography pages, build settings, or production dependencies. Two human users are represented by original male and female SVG avatars. This is an interactive UI prototype, not a connected agent service.
+A mobile-first companion at `/companion/`, with a desktop sidebar, phone bottom navigation, original illustrated artifact covers, light/evening themes, and Milk/Mocha bear avatars. Raghav uses Milk; Ananya uses Mocha. The bears represent the two people, not two agents. Agent replies, task progress, and connector cards remain explicitly labeled previews.
 
-## Preview and production
+**Current status:** Production Google OAuth settings and two distinct private Vercel Blob stores are configured. Both stores were tested to reject anonymous requests and the other store's credential before receiving any user content. See [Cocoa setup and account isolation](cocoa-setup.md) for configuration and the real-account acceptance checks the owners should perform. Missing configuration still fails closed rather than falling back to the former public demo.
 
-From the repository root, with Node 20+:
+## Current architecture
 
-```sh
-node tools/companion/serve.cjs
-```
+- The public HTML, CSS, and JavaScript contain no user content or credentials.
+- `bootstrap.mjs` checks the protected session endpoint, then loads only the authenticated person's workspace. Without a valid session it shows the Cocoa sign-in page.
+- Google OpenID Connect is implemented using pinned Auth.js, including state, nonce, PKCE, CSRF validation, encrypted session cookies, and exact server-side verification of the two approved accounts.
+- `api/cocoa.mjs` is a Vercel Node adapter. Narrow rewrites in `vercel.json` route only Cocoa's API paths; the existing portfolio and photography routes are unchanged.
+- `server/cocoa/auth.mjs` verifies identity and authorization. `handler.mjs` checks every read and write. `store.mjs` selects a separate private Blob credential for each person and derives document paths from the verified Google subject.
+- The UI does not select an owner. Account switching requires sign-out and a new Google authentication. A stale tab includes its expected identity on workspace requests, so changing browser sessions cannot redirect its writes into the other person's store.
+- Workspace contents are never persisted in localStorage or sessionStorage. Private writes are debounced and serialized; conditional ETags prevent stale overwrite. Failed saves show a warning and remain exportable from the current tab.
+- No Google access tokens, Blob URLs, storage tokens, email allowlists, or secrets are returned to the frontend. The browser requests only same-origin session and workspace endpoints. Google is reached by top-level navigation during sign-in.
 
-Open <http://127.0.0.1:4173/companion/> **on the machine running the server**. The preview server binds only to loopback, serves an explicit allowlist of six static assets, and never exposes repository files. It does not run the rest of the portfolio. The Portfolio link works on the production site, not this focused preview.
+## Features
 
-The existing Create React App build copies `public/companion/` unchanged to `build/companion/`. On the portfolio’s current deployment, the intended route is `https://portfolio-nine-woad-49.vercel.app/companion/`. That is a deployment target, not a claim that it has been published. A GitHub change must be published through an approved workflow and Vercel must successfully deploy it first. A preview can be public because it contains only synthetic examples and original artwork, never actual private chats or account data.
+Chat has conversations, searchable history, drafts, desktop keyboard sending, explicit touch sending, and file-name-only attachment previews. The artifact library includes four illustrated examples, filters, search, bookmarks, document reading, Markdown export, and editable notes. Heartbeat has three explicitly illustrative long-running-task scenarios. Memories support add/edit/search/pin/delete. Six connector cards let each person record permission preferences but do not connect any accounts. Google **sign-in** is separate from future connector OAuth.
 
-## Phone access with Tailscale
+Names and preferences belong to the signed-in person's workspace. The other person's data and settings never appear in that session. Exports are intentional downloads of the current person's data only; keep downloaded files private on shared devices.
 
-Run the loopback preview on your personal computer, not just the development machine. Install/sign in to Tailscale on that computer and your phone. Before sharing, restrict tailnet access to the two intended people using your tailnet policy; profile switching in this app is not authorization. Tailscale Serve uses the existing tailnet identity and policy boundary.
+## Design research
 
-After reviewing and authorizing that exposure, use the official [Tailscale Serve guide](https://tailscale.com/kb/1312/serve) and run on the personal computer:
+- [Muse product announcement](https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/): conversational goals, long-running work, explicit approvals, editable memories, and scoped connectors. The authenticated product UI was not accessible, so this is interaction inspiration, not pixel-perfect reverse engineering.
+- [New Computer / Dot](https://new.computer/): personal, human-centered computing. The official site announced the product's wind-down; its former live application was not inspected.
+- [REA](https://github.com/morluto/rea): reviewed the public toolkit capabilities. It was not installed or used against commercial binaries. Exact behavioral inspection would need an authorized app build or browser session.
+- [Milk and Mocha official store](https://milkmochabear.com/): visual reference for the white and brown bear avatar renditions. These are hand-drawn SVG renditions, not official licensed assets or an endorsement. No remote character images are loaded at runtime.
 
-```sh
-tailscale serve --bg http://127.0.0.1:4173
-tailscale serve status
-```
+The surrounding aesthetic is original: paper surfaces, sage and cocoa-adjacent warm accents, editorial serif headings, quiet spacing, and original SVG landscape/still-life artwork. All fonts use the system stack and there are no analytics scripts or remote image/font dependencies.
 
-Open the HTTPS device URL printed by Tailscale, with `/companion/` appended. The exact hostname depends on your machine and tailnet, so it must not be invented. Use **Serve, not Funnel**. Do not broaden the local listener to all interfaces. Before adding private backend data, verify that an unauthenticated device and an unauthorized tailnet user cannot access the service. The local development preview has no account authentication, and a Tailscale connection does not make the profile dropdown an authentication system.
+## Running and testing
 
-To stop sharing, disable the specific Serve listener using the current `tailscale serve --help` instructions. Do not reset unrelated Serve routes. The server itself exits with Ctrl+C. No Tailscale configuration is changed by this repository.
-
-## What works
-
-- Chat: local conversations, history search, per-conversation drafts, keyboard sending on desktop, explicit send button on touch devices, and file-name-only attachment previews. Replies are deterministic, visibly labeled demo content. File contents are never read.
-- Artifacts: four original illustrated sample documents, full reading view, categories, search, bookmarking, Markdown download, and editable/deletable personal notes.
-- Heartbeat: clearly labeled offline status and three illustrative task timelines, with locally persisted pause/resume preview states. No scheduler or background worker exists.
-- Memory: add, edit, filter, pin, and deliberately forget memories. Seed memories are labeled samples.
-- Connectors: six application cards and an explicit permission preference sheet. Preferences save locally, but there is no OAuth, token input, linked account, or external request.
-- Two people: independently stored chats, notes, memories, bookmarks, permissions, task previews, and drafts. The names are editable in Settings. The avatars represent people, not two agents. There is no sharing between their workspaces.
-- Light/evening themes, phone bottom navigation, desktop sidebar and inspiration shelf, keyboard search, reduced-motion support, native modal focus management, data export, and per-person reset with confirmation.
-
-## Design research and provenance
-
-Public materials were inspected rather than copying proprietary code or bypassing sign-in:
-
-- [Muse’s product announcement](https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/): conversational entry point, longer-running work, explicit approvals, memory users can correct, and individually scoped connections. These are interaction references, not an assertion about the authenticated product’s exact pixel layout. The Muse web app redirected to authentication; its private UI was not inspected.
-- [New Computer / Dot](https://new.computer/): the official site describes its personal, human-centered north star and announces the product’s wind-down. The former live application was not available for hands-on inspection, so no claim of reverse engineering its internals is made.
-- [REA](https://github.com/morluto/rea): reviewed its public capabilities and requirements. REA is an inspection toolkit, not the Muse app. It was not installed or run against commercial app binaries. If exact behavioral parity is later wanted, supply an authorized app build or browser session first; keep that investigation separate from this frontend.
-
-The implemented aesthetic is original: warm paper surfaces, forest/sage accents, editorial serif headings, quiet spacing, small tactile controls, original SVG landscape and still-life covers, and two original human avatar illustrations. All fonts use the system stack; there are no trackers, remote images, font CDNs, or third-party runtime libraries.
-
-## Structure and future agent integration
-
-| File | Responsibility |
-| --- | --- |
-| `public/companion/index.html` | Isolated page shell and restrictive Content Security Policy |
-| `public/companion/styles.css` | Responsive layouts, light/dark tokens, safe-area navigation, reduced motion |
-| `public/companion/visuals.mjs` | Original inline SVG artwork, avatars, icons, and companion mascot |
-| `public/companion/state.mjs` | Seed data, schema validation, bounded storage hydration, explicit demo replies |
-| `public/companion/app.mjs` | Rendering, event delegation, browser-only interactions and persistence |
-| `tools/companion/serve.cjs` | Loopback-only, allowlisted static preview server |
-| `tools/companion/*.test.*` | Pure state tests and browser interaction/responsiveness/accessibility checks |
-
-State is versioned under `morrow.prototype.v1` in localStorage. It is neither encrypted nor synchronized between devices. Both people’s workspaces can be accessed by anyone using this browser. Treat it as a visual demo until backend authentication and per-user authorization are implemented. Storage failures fall back to session-only behavior with a visible warning. Collections and message sizes are bounded; no existing user data is silently evicted to save new data.
-
-Future backend boundaries, intentionally not implemented:
-
-1. **Identity before sync:** bind each workspace to a verified person on the server, not a client-provided profile name. Authorize every conversation, artifact, memory, and connector operation for that person. Preserve the switcher as presentation only unless both accounts have separately authenticated sessions.
-2. **Chat transport:** replace `demoReply()` at the submission boundary with a server-mediated message transport. Preserve drafts, add cancel/error/reconnect states and request IDs, and make streamed content text-safe. Never place model or connector credentials in the bundle or localStorage.
-3. **Long-running jobs:** heartbeat should consume persisted server events with timestamps, progress, outputs, approval requests, and terminal states. Pausing must be acknowledged by the server before presenting it as real. Browser closure must not terminate an authorized server-side job.
-4. **Artifacts:** start with typed document schemas (title, sections, charts, tables, sources) and trusted renderers. Never insert generated HTML into this origin. If executable artifacts are later necessary, isolate them on a separate origin with an appropriately sandboxed iframe and no access to account cookies or parent storage.
-5. **Memory:** distinguish user-authored facts from proposed/inferred memories. Require review, expose provenance and deletion controls, and propagate deletions to the backing store.
-6. **Connectors:** implement provider OAuth and server-side credential storage, least-privilege scopes, revocation, and action-level approval. The preference controls currently make no such security guarantee.
-7. **Release gate:** keep the public portfolio version as a synthetic demo. Put actual private agent data behind verified access controls before enabling any requests; then narrow `connect-src` to the chosen same-origin service. Do not remove the CSP wholesale or broaden listener binds to make integration easier.
-
-## Validation
-
-The browser tooling is isolated so it cannot change the portfolio’s existing dependency tree:
+Use the package's required Node 24.x:
 
 ```sh
 npm ci
-npm run build  # Use the package’s required Node 24.x
-npm --prefix tools/companion ci
-npm --prefix tools/companion test
-cd tools/companion
-npx playwright install chromium
-npm run test:browser
+node --env-file-if-exists=.env.local tools/companion/serve.cjs
 ```
 
-Browser tests start a loopback server if needed and stop only the one they started. They cover interactions, profile separation, reload persistence, untrusted input escaping, blocked localStorage, security headers, zero external runtime requests, accessibility scans, and all five sections at 320, 390, 768, 1024, and 1920px. Screenshots and audit output are in ignored `tools/companion/test-results/`. Automated Chromium emulation is not a substitute for testing an actual iPhone/Android keyboard and Safari; those require the owner’s devices.
+The local URL is <http://127.0.0.1:4173/companion/>. Without OAuth configuration it intentionally shows a disabled sign-in screen. The preview server listens only on loopback, serves an explicit static allowlist and Cocoa's API, and never serves repository files. It does not serve the portfolio root.
+
+```sh
+npm --prefix tools/companion ci
+node --test tools/companion/state.test.mjs tools/companion/auth.test.mjs
+npm --prefix tools/companion run test:browser
+npm run build
+```
+
+Browser checks use browser-only HTTP mocks, not a deployed authentication bypass. They cover the interface at five sizes, persistence through mocked private APIs, isolated account fixtures, inaccessible account switching, stale-tab identity changes, zero browser persistence, untrusted text, logout, failure states, and automated WCAG A/AA checks. Backend tests independently exercise real Auth.js encrypted test sessions, allowlist checks, forged/expired session denial, cross-owner attempts, cross-site write rejection, revision conflicts, and missing configuration. Live Google, Vercel private stores, Safari/mobile keyboards, and the production callback need the owner's setup and real-device checks described in `cocoa-setup.md`.
+
+## Tailscale and future agents
+
+The hosting target remains `https://portfolio-nine-woad-49.vercel.app/companion/`; a new authenticated deployment must be explicitly approved and verified. No automatic publishing occurs from these scripts.
+
+For personal-machine access, keep the local listener on loopback and use [Tailscale Serve](https://tailscale.com/kb/1312/serve), not Funnel. Restrict the tailnet to the two intended people before sharing. Configure `AUTH_URL` and Google's authorized redirect URI for the actual HTTPS device hostname; do not invent a tailnet URL or bypass Google because a request arrived over Tailscale. No Tailscale configuration is changed by this repository.
+
+Future agents must inherit the verified owner identity on the server. Use separate runtime directories/containers or stronger isolation, secrets, connector tokens, job streams, and artifact paths per account. Never accept an owner identifier from an agent-generated payload or browser selector as authorization. Executable artifacts must live in sandboxed, separate-origin contexts, not arbitrary HTML inserted into this app. Sensitive real-world actions require explicit approval from the owning person. The current deployment runs no agents and does not yet provide separate VMs.
+
+## Legacy prototype data
+
+The older public demo used `morrow.prototype.v1` in localStorage. The key remains in legacy schema tests but authenticated Cocoa never loads or imports it. It is not silently deleted. If it contains private information, its owner should export or remove it on the original browser before sharing that browser. New authenticated workspaces start separately; there is no ambiguous cross-account migration of shared demo history.
