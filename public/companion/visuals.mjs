@@ -32,9 +32,9 @@ export const ICONS = {
 };
 export function icon(name, cls = '') { return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ICONS.spark}</svg>`; }
 // Hand-drawn vector renditions, referenced from the official milkmochabear.com store.
-// The owner explicitly assigns Milk to Raghav and Mocha to Ananya.
+// The owner explicitly assigns Milk to Ananya and Mocha to Raghav.
 export function avatar(profile, cls = '') {
-  const mocha = profile === 'guest';
+  const mocha = profile === 'raghav';
   const coat = mocha ? '#cc9967' : '#fffdf8';
   const outline = mocha ? '#976740' : '#c4b9ae';
   const blush = mocha ? '#dc8f7d' : '#efb4b0';

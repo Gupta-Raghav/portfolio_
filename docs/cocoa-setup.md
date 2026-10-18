@@ -4,7 +4,7 @@ Cocoa now uses Google OpenID Connect through Auth.js. The frontend is a public, 
 
 ## Isolation guarantees and limits
 
-- The server accepts exactly two configured, verified Gmail identities. Milk maps to Raghav; Mocha maps to Ananya. Identity comes from Google's verified OIDC claims, never a requested profile, email, user ID, or a browser dropdown.
+- The server accepts exactly two configured, verified Gmail identities. Milk maps to Ananya; Mocha maps to Raghav. Identity comes from Google's verified OIDC claims, never a requested profile, email, user ID, or a browser dropdown.
 - Use **two distinct private Vercel Blob stores**, with separate server-only credentials. Each account's token is selected server-side. Each document path also includes a SHA-256 digest of the immutable Google subject. Neither person receives a storage credential or a direct Blob URL.
 - Every workspace read/write independently checks the encrypted Auth.js session, the current email allowlist, and the tab's expected account identity. An old tab cannot write one person's data into the other person's newly authenticated session.
 - No private workspaces, drafts, or OAuth tokens are stored in localStorage/sessionStorage. Workspace state is in tab memory and private server storage. Logout removes the UI and broadcasts logout to other tabs. Returning tabs revalidate identity before showing content.

@@ -1,6 +1,6 @@
 # Cocoa: a personal space for two
 
-A mobile-first companion at `/companion/`, with a desktop sidebar, phone bottom navigation, original illustrated artifact covers, light/evening themes, and Milk/Mocha bear avatars. Raghav uses Milk; Ananya uses Mocha. The bears represent the two people, not two agents. Agent replies, task progress, and connector cards remain explicitly labeled previews.
+A mobile-first companion at `/companion/`, with a desktop sidebar, phone bottom navigation, original illustrated artifact covers, light/evening themes, and Milk/Mocha bear avatars. Raghav uses Mocha; Ananya uses Milk. The bears represent the two people, not two agents. Agent replies, task progress, and connector cards remain explicitly labeled previews.
 
 **Current status:** Production Google OAuth settings and two distinct private Vercel Blob stores are configured. Both stores were tested to reject anonymous requests and the other store's credential before receiving any user content. See [Cocoa setup and account isolation](cocoa-setup.md) for configuration and the real-account acceptance checks the owners should perform. Missing configuration still fails closed rather than falling back to the former public demo.
 
