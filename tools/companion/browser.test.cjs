@@ -133,6 +133,18 @@ const output = path.join(__dirname, 'test-results');
     await second.page.getByRole('button', { name: 'Send message', exact: true }).click(); await settle();
     assert.doesNotMatch(JSON.stringify(saved.get('a'.repeat(64))), /Ananya-only/);
     assert.doesNotMatch(JSON.stringify(saved.get('b'.repeat(64))), /Raghav-only/);
+    // The owner's bear appears inside the workspace, not just on the login screen.
+    for (const [personalPage, bear] of [[page, 'mocha'], [second.page, 'milk']]) {
+      await personalPage.goto(base);
+      await personalPage.locator('.welcome').waitFor();
+      assert.equal(await personalPage.locator('.welcome .hero-orb').getAttribute('data-character'), bear);
+      await personalPage.locator('.composer-mode').click();
+      assert.equal(await personalPage.locator('dialog .companion-intro').getAttribute('data-character'), bear);
+      await personalPage.getByRole('button', { name: 'Close dialog', exact: true }).click();
+      await personalPage.locator('.recent-chat').first().click();
+      assert.equal(await personalPage.locator('.message.assistant .companion-bear').first().getAttribute('data-character'), bear);
+      assert.equal(await personalPage.locator('.orb').count(), 0);
+    }
     // Same-browser account replacement cannot save an older tab's data into the new account.
     await page.goto(base); await page.locator('#message').waitFor();
     control.profile = 'guest'; await page.locator('#message').fill('Must not enter Ananya workspace'); await settle();
