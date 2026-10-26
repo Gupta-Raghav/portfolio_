@@ -99,6 +99,8 @@
   .stop.past, .stop.on { color: var(--muted); } .stop.on { color: var(--fg); }
   .stop.past::before, .stop.on::before { background: var(--accent); }
   .stop.past i, .stop.on i { background: var(--accent); border-color: var(--accent); } .stop.on i { transform: scale(1.4); }
+  .maple { padding-bottom: 6vh; }
+  .shot figcaption .t { display: block; font-style: normal; font-size: 11.5px; color: var(--accent); letter-spacing: .06em; margin-bottom: 6px; }
   .set .meta .where { font-size: 12px; color: var(--accent); margin-top: 12px; letter-spacing: .04em; }
   .shot figcaption { display: block; margin-top: 12px; }
   .shot figcaption b { display: block; font-size: 22px; line-height: 1.1; font-weight: 400; color: var(--fg); }
@@ -200,20 +202,20 @@
 
 <nav aria-label="Primary">
   <a class="mono" href="/" style="text-decoration:none">Raghav Gupta</a>
-  <div class="links mono"><a href="#frames">Frames</a><a href="#series">The trip</a><a href="#sheet">Contact sheet</a><a class="keep" href="/">Portfolio</a></div>
+  <div class="links mono"><a href="#frames">Frames</a><a href="#maple">Maple Pass</a><a href="#series">Stories</a><a href="#sheet">Contact sheet</a><a class="keep" href="/">Portfolio</a></div>
 </nav>
 
 <header class="hero">
   <div>
-    <div class="eyebrow mono">Photographs, spring 2026</div>
+    <div class="eyebrow mono">Photographs, 2025 to now</div>
     <h1 class="serif"><span class="ln"><span>Light I found</span></span><span class="ln"><span>on the way</span></span><span class="ln"><span><i>somewhere</i>.</span></span></h1>
-    <p>I write software for a living and carry a camera the rest of the time. One spring, one lens: Big Sur, Yosemite, and a week in the Tetons and Yellowstone.</p>
+    <p>I write software for a living and carry a camera the rest of the time. Lately that has meant Big Sur, Yosemite, the Tetons and Yellowstone, and one golden afternoon on Maple Pass.</p>
     <button class="shutter mono" id="shutter" type="button"><i aria-hidden="true"></i>Press the shutter</button>
   </div>
   <div class="stage">
     <canvas id="cam" aria-label="3D model of a Sony α7C II camera. Drag to rotate." role="img"></canvas>
   </div>
-  <div class="spec mono" aria-hidden="true"><span><b>Kit</b> Sony α7C II, Sigma 24-70 F2.8</span><span><b>Now showing</b> <span id="specCount"></span> frames</span><span>drag the camera</span></div>
+  <div class="spec mono" aria-hidden="true"><span><b>Kit</b> Sony α7C II, 24-70 and 70-200</span><span><b>Now showing</b> <span id="specCount"></span> frames</span><span>drag the camera</span></div>
 </header>
 
 <section class="frames" id="frames">
@@ -224,8 +226,16 @@
   </div>
 </section>
 
+<section class="series maple" id="maple">
+  <div class="sec-head reveal"><div><div class="eyebrow mono">Featured story  ·  Oct 3, 2026</div><h2 class="sec-title serif" style="margin-top:14px">Maple Pass, <i style="color:var(--accent)">in larch season</i></h2></div>
+    <p>One afternoon on the Maple Pass loop in the North Cascades, the one week a year the larches turn gold. Thirteen frames in the order I took them, <span class="mono" id="mp-span"></span>.</p></div>
+  <article class="set" id="mp"><div class="meta reveal"><div class="n mono">North Cascades, Washington</div><h3 class="serif">Up for the <i>light</i></h3><div class="where mono">Maple Pass Loop  ·  7.2 miles</div>
+    <p>A late start on purpose. The climb is all forest, then rock, then a ridge covered in gold larch and red huckleberry right as the sun drops behind the peaks. We came down by headlamp.</p><span class="tag mono">13 frames</span></div>
+    <div class="pics" id="mp-pics"></div></article>
+</section>
+
 <section class="series" id="series">
-  <div class="sec-head reveal"><h2 class="sec-title serif">The trip</h2><p>Four weeks, five chapters, told in the order it happened. Tap any frame for the settings behind it.</p></div>
+  <div class="sec-head reveal"><h2 class="sec-title serif">More stories</h2><p>The spring road trip in the order it happened, then the Cascades and closer to home. Tap any frame for the settings behind it.</p></div>
   <nav class="route" id="route" aria-label="Trip chapters"></nav>
   <div id="sets"></div>
 </section>
@@ -242,11 +252,11 @@
   <div class="reveal">
     <div class="eyebrow mono">In the bag</div>
     <h2 class="sec-title serif" style="margin-top:14px">Small camera,<br/><i style="color:var(--accent)">long</i> walks.</h2>
-    <p>A full-frame body small enough that it actually comes along, and one zoom that covers almost everything on this page.</p>
+    <p>A full-frame body small enough that it actually comes along, and a 24-70 that covers almost everything on this page.</p>
   </div>
   <dl class="mono reveal">
     <dt>Body</dt><dd>Sony α7C II</dd>
-    <dt>Lens</dt><dd>Sigma 24-70mm F2.8 DG DN II Art</dd>
+    <dt>Lenses</dt><dd>Sigma 24-70mm F2.8 Art, Sony 70-200mm</dd>
     <dt>Favourite hour</dt><dd>the one after sunset</dd>
     <dt>Longest exposure here</dt><dd id="longest"></dd>
   </dl>
@@ -293,7 +303,15 @@
       text: 'A detour to Idaho Falls, one last sunrise, and one last sunset over the ranch.',
       titles: ['One second at the falls', 'Morning through the pines', 'Last light on the ranch', 'Dandelion field'] },
   ];
-  const FEATURED = 10;
+  CHAPTERS.push(
+    { name: 'North Cascades', short: 'Cascades', when: 'Sep 6, 2026', where: 'North Cascades Highway, Washington', lead: 'North <i>Cascades</i>',
+      text: 'A scouting drive along Highway 20. Turquoise water, a wall of peaks, and a trailhead I made a note of.', titles: ["Glacier milk", "From the overlook"] },
+    { name: 'Closer to home', short: 'Washington', when: '2025 to 2026', where: 'Seattle, Puget Sound and the Oregon coast', lead: 'Closer to <i>home</i>',
+      text: 'The year in between big trips. Ferries, the coast on the Fourth of July, and Rainier showing up on the rare clear day.', titles: ["Morning elk", "Night glow", "Sea stacks", "Ferry deck", "Haystack Rock", "Headland at dusk", "Japanese garden", "Seattle after dark", "Sail at sunset", "Blue Angels", "Rainier in January", "Skyline at last light", "Rainier from the water"] },
+  );
+  const MAPLE = ["Into the woods", "First gold", "Out of the trees", "Huckleberry red", "Larches, backlit", "The sun goes behind the ridge", "Last direct light", "Gold below, blue above", "Alpenglow", "The red slope", "Every ridge at once", "One last look", "Twenty seconds of sky"];
+  const FEAT = ["The sun goes behind the ridge", "Moulton Barn", "Alpenglow", "Walking through steam", "Larches, backlit", "One second at the falls", "Huckleberry red", "Artist Point", "Twenty seconds of sky", "Tunnel View", "Every ridge at once", "Mount Moran"];
+  const FEATURED = FEAT.length;
   const shutterTxt = (s) => !s ? null : s >= 0.3 ? `${+s.toFixed(1)}s` : `1/${Math.round(1 / s)}`;
   const exifLine = (p) => [p.mm && `${Math.round(p.mm)}mm`, p.f && `f/${p.f}`, shutterTxt(p.s), p.iso && `ISO ${p.iso}`].filter(Boolean).join('  ·  ') || p.place;
   const fmtDate = (d) => d ? new Date(d + 'T12:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
@@ -302,10 +320,10 @@
   const alt = (p) => `${p.title}${p.place ? ', ' + p.place : ''}`;
 
   /* ---------- build DOM ---------- */
-  const track = document.getElementById('track');
-  PHOTOS.slice(0, FEATURED).forEach((p, i) => {
-    const f = document.createElement('figure'); f.className = 'frame'; f.tabIndex = 0; f.dataset.i = i; f.setAttribute('role', 'button'); f.setAttribute('aria-label', `Open ${p.title}`);
-    f.innerHTML = `<div class="ph"><img src="${p.small}" srcset="${p.small} 1400w, ${p.src} 3600w" sizes="(max-width: 900px) 80vw, 45vw" width="${p.w}" height="${p.h}" alt="${alt(p)}" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async"></div><figcaption class="mono"><b>${p.title}</b><span>${exifLine(p)}</span></figcaption>`;
+  const track = document.getElementById('track'), idx = Object.fromEntries(PHOTOS.map((p, i) => [p.title, i]));
+  FEAT.map((t) => idx[t]).forEach((i, n) => {
+    const p = PHOTOS[i], f = document.createElement('figure'); f.className = 'frame'; f.tabIndex = 0; f.dataset.i = i; f.setAttribute('role', 'button'); f.setAttribute('aria-label', `Open ${p.title}`);
+    f.innerHTML = `<div class="ph"><img src="${p.small}" srcset="${p.small} 1400w, ${p.src} 3600w" sizes="(max-width: 900px) 80vw, 45vw" width="${p.w}" height="${p.h}" alt="${alt(p)}" loading="${n < 3 ? 'eager' : 'lazy'}" decoding="async"></div><figcaption class="mono"><b>${p.title}</b><span>${exifLine(p)}</span></figcaption>`;
     track.append(f);
   });
   document.getElementById('ftotal').textContent = pad(FEATURED);
@@ -320,20 +338,25 @@
     if (rows.length > 1 && rows[rows.length - 1].length === 1 && rows[rows.length - 2].length > 1) rows[rows.length - 2].push(rows.pop()[0]);
     return rows;
   };
-  const sets = document.getElementById('sets'), idx = Object.fromEntries(PHOTOS.map((p, i) => [p.title, i]));
+  const shotHTML = ({ p, i }, sizes, time) => `<figure class="shot" style="--ar:${(p.w / p.h).toFixed(3)}" data-i="${i}" tabindex="0" role="button" aria-label="Open ${p.title}"><div class="ph"><img src="${p.small}" srcset="${p.small} 1400w, ${p.src} 3600w" sizes="${sizes}" width="${p.w}" height="${p.h}" alt="${alt(p)}" loading="lazy" decoding="async"></div><figcaption>${time && p.time ? `<i class="t mono">${p.time}</i>` : ''}<b class="serif">${p.title}</b><span>${p.caption}</span></figcaption></figure>`;
+  // Maple Pass: one afternoon, told by the clock
+  { const items = MAPLE.map((t) => ({ p: PHOTOS[idx[t]], i: idx[t] }));
+    document.getElementById('mp-pics').innerHTML = rowsOf(items).map((row) => `<div class="jrow">${row.map((it) => shotHTML(it, '(max-width: 900px) 90vw, 60vw', true)).join('')}</div>`).join('');
+    document.getElementById('mp-span').textContent = `${items[0].p.time} to ${items[items.length - 1].p.time}`; }
+  const sets = document.getElementById('sets');
   const route = document.getElementById('route');
   CHAPTERS.forEach((c, ci) => {
     const items = c.titles.map((t) => ({ p: PHOTOS[idx[t]], i: idx[t] }));
     const el = document.createElement('article'); el.className = 'set' + (ci % 2 ? ' flip' : ''); el.id = `ch-${ci + 1}`;
     el.innerHTML = `<div class="meta reveal"><div class="n mono">Chapter ${pad(ci + 1)}  ·  ${c.when}</div><h3 class="serif">${c.lead}</h3><div class="where mono">${c.where}</div><p>${c.text}</p><span class="tag mono">${items.length} frames</span></div>
-      <div class="pics">${rowsOf(items).map((row) => `<div class="jrow">${row.map(({ p, i }) => `<figure class="shot" style="--ar:${(p.w / p.h).toFixed(3)}" data-i="${i}" tabindex="0" role="button" aria-label="Open ${p.title}"><div class="ph"><img src="${p.small}" srcset="${p.small} 1400w, ${p.src} 3600w" sizes="(max-width: 900px) 90vw, 60vw" width="${p.w}" height="${p.h}" alt="${alt(p)}" loading="lazy" decoding="async"></div><figcaption><b class="serif">${p.title}</b><span>${p.caption}</span></figcaption></figure>`).join('')}</div>`).join('')}</div>`;
+      <div class="pics">${rowsOf(items).map((row) => `<div class="jrow">${row.map((it) => shotHTML(it, '(max-width: 900px) 90vw, 60vw')).join('')}</div>`).join('')}</div>`;
     sets.append(el);
     const a = document.createElement('a'); a.href = `#ch-${ci + 1}`; a.className = 'stop mono';
     a.innerHTML = `<i></i><span>${c.short}</span><em>${c.when}</em>`; route.append(a);
   });
   const stops = [...route.children];
   const cio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const n = +e.target.id.split('-')[1] - 1; stops.forEach((s, k) => { s.classList.toggle('on', k === n); s.classList.toggle('past', k < n); }); } }), { rootMargin: '-45% 0px -45% 0px' });
-  document.querySelectorAll('.set').forEach((el) => cio.observe(el));
+  document.querySelectorAll('.set[id^="ch-"]').forEach((el) => cio.observe(el));
   const strip = document.getElementById('strip');
   PHOTOS.forEach((p, i) => {
     const b = document.createElement('button'); b.className = 'cell'; b.dataset.i = i; b.setAttribute('aria-label', `Open ${p.title}`);
@@ -383,7 +406,7 @@
     document.getElementById('lbSeries').textContent = `${p.place}  ·  ${pad(cur + 1)} / ${pad(PHOTOS.length)}`;
     document.getElementById('lbTitle').textContent = p.title;
     document.getElementById('lbCap').textContent = p.caption;
-    const rows = [['Where', p.place], ['Camera', p.cam], ['Lens', p.lens], ['Focal', p.mm && `${Math.round(p.mm)}mm`], ['Aperture', p.f && `f/${p.f}`], ['Shutter', shutterTxt(p.s)], ['ISO', p.iso], ['When', fmtDate(p.date)]].filter(([, v]) => v);
+    const rows = [['Where', p.place], ['Camera', p.cam], ['Lens', p.lens], ['Focal', p.mm && `${Math.round(p.mm)}mm`], ['Aperture', p.f && `f/${p.f}`], ['Shutter', shutterTxt(p.s)], ['ISO', p.iso], ['When', fmtDate(p.date)], ['Time', p.time]].filter(([, v]) => v);
     document.getElementById('lbExif').innerHTML = rows.length ? rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('') : '<dt>EXIF</dt><dd>stripped on export</dd>';
     [cur - 1, cur + 1].forEach((j) => { const im = new Image(); im.src = PHOTOS[(j + PHOTOS.length) % PHOTOS.length].src; });
   };
