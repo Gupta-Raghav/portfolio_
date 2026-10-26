@@ -1,8 +1,8 @@
 // Procedural compact full-frame camera in the style of a Sony α7C II (silver top plate,
 // black leatherette body, rangefinder-style EVF corner) with a small silver prime lens.
 // 1 unit = 100 mm. The front of the camera faces +Z.
-import * as THREE from '/vendor/three/three.module.js';
-import { RoundedBoxGeometry } from '/vendor/three/addons/geometries/RoundedBoxGeometry.js';
+import * as THREE from '/vendor/three/three.module.js?v=3';
+import { RoundedBoxGeometry } from '/vendor/three/addons/geometries/RoundedBoxGeometry.js?v=3';
 
 function noiseTexture(size = 256, scale = 1) {
   const c = document.createElement('canvas'); c.width = c.height = size;

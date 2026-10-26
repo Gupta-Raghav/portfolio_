@@ -330,9 +330,12 @@
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > innerHeight * 0.6), { passive: true });
 
   let THREE = null, RoomEnvironment = null, makeGhost3D = null;
+  let why3d = noGL ? 'disabled by ?nogl' : '';
+  const load3d = () => Promise.all([import('/vendor/three/three.module.js?v=3'), import('/vendor/three/addons/environments/RoomEnvironment.js?v=3'), import('./ghost3d.js?v=3')]);
   if (!noGL) try {
-    [THREE, { RoomEnvironment }, { makeGhost3D }] = await Promise.all([import('/vendor/three/three.module.js'), import('/vendor/three/addons/environments/RoomEnvironment.js'), import('./ghost3d.js')]);
-  } catch (err) { console.warn('3D disabled:', err); }
+    // retry once: a dropped request or a stale cached module should not cost the whole scene
+    [THREE, { RoomEnvironment }, { makeGhost3D }] = await load3d().catch(() => new Promise((r) => setTimeout(r, 600)).then(load3d));
+  } catch (err) { why3d = 'module load failed: ' + err.message; console.warn('3D disabled:', err); }
 
   /* hero: the Kiro ghost drawn in particles, eyes follow the cursor */
   try {
@@ -451,6 +454,8 @@
       renderer.render(scene, camera);
     });
   } catch (err) {
+    why3d = why3d || 'WebGL failed: ' + err.message; console.warn('3D hero disabled:', why3d);
+    document.documentElement.dataset.no3d = why3d;
     const f = document.getElementById('field'); f.style.display = 'none';
     const d = document.createElement('div'); d.className = 'ghost-fallback'; d.innerHTML = GHOST_SVG; f.after(d);
   }

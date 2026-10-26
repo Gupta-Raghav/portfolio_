@@ -1,6 +1,6 @@
 // A rounded, character-style Kiro ghost: dome head, flared skirt with a
 // rippling scalloped hem, glossy eyes that look around and blink, tiny arms.
-import * as THREE from '/vendor/three/three.module.js';
+import * as THREE from '/vendor/three/three.module.js?v=3';
 
 const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
 

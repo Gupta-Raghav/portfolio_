@@ -405,7 +405,7 @@
   document.getElementById('shutter').onclick = () => { shoot(); pop(.9); setTimeout(() => document.getElementById('frames').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 420); };
   try {
   if (new URLSearchParams(location.search).has('nogl')) throw new Error('3D preview disabled');
-  const [THREE, { RoomEnvironment }, { makeCamera }] = await Promise.all([import('/vendor/three/three.module.js'), import('/vendor/three/addons/environments/RoomEnvironment.js'), import('./camera3d.js')]);
+  const [THREE, { RoomEnvironment }, { makeCamera }] = await Promise.all([import('/vendor/three/three.module.js?v=3'), import('/vendor/three/addons/environments/RoomEnvironment.js?v=3'), import('./camera3d.js?v=3')]);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   const scene = new THREE.Scene(), view = new THREE.PerspectiveCamera(30, 1, 0.1, 100); view.position.set(0, 0.25, 4.6);
