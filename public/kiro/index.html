@@ -4,6 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Raghav Gupta, Kiro agent runtime</title>
+<script>document.documentElement.classList.add('anim');setTimeout(function(){if(!window.__pageOk)document.documentElement.classList.remove('anim')},2500);</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet" />
 <style>
@@ -28,8 +30,10 @@
   nav .links a:hover { color: var(--fg); }
 
   /* hero: particle ghost */
-  .hero { position: relative; min-height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
   #field { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero .ghost-fallback { position: absolute; right: 12vw; top: 50%; transform: translateY(-50%); width: min(30vw, 400px); aspect-ratio: 700 / 840; }
+  @media (max-width: 1000px) { .hero .ghost-fallback { right: auto; left: 50%; top: 92px; transform: translateX(-50%); width: min(52vw, 30vh); } }
   .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
   .hero-inner { position: relative; z-index: 1; padding: 0 6vw 7vh; max-width: 62vw; pointer-events: none; }
   .hero-inner a, .hero-inner button { pointer-events: auto; }
@@ -53,8 +57,8 @@
     .hero-bar .scroll { display: none; }
   }
   .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
-  .split .w > span { display: inline-block; transform: translateY(105%); transition: transform .9s var(--ease); transition-delay: calc(var(--i) * 45ms); }
-  .split.in .w > span { transform: none; }
+  .anim .split .w > span { display: inline-block; transform: translateY(105%); transition: transform .9s var(--ease); transition-delay: calc(var(--i) * 45ms); }
+  .anim .split.in .w > span { transform: none; }
 
   section { border-top: 1px solid var(--line); }
   .sec-head { padding: 18vh 6vw 8vh; display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap; }
@@ -118,8 +122,9 @@
   .diagram { border: 1px solid var(--line); border-radius: 16px; background: var(--panel); padding: 28px; font-size: 13px; line-height: 2; color: #cfcbd6; white-space: pre; overflow-x: auto; transition: border-color .5s, transform .6s var(--ease); }
   .case:hover .diagram { border-color: #3a3346; transform: translateY(-4px); }
   .diagram .k { color: var(--lilac); } .diagram .ok { color: var(--mint); } .diagram .s { color: var(--peach); } .diagram .d { color: var(--muted); }
-  .diagram .ln { display: block; opacity: 0; transform: translateX(-8px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(var(--i) * 120ms + 200ms); }
-  .case.in .diagram .ln { opacity: 1; transform: none; }
+  .diagram .ln { display: block; }
+  .anim .diagram .ln { opacity: 0; transform: translateX(-8px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(var(--i) * 120ms + 200ms); }
+  .anim .case.in .diagram .ln { opacity: 1; transform: none; }
 
   .row { display: grid; grid-template-columns: 120px 1fr 160px; gap: 24px; padding: 22px 6vw; border-top: 1px solid var(--line); align-items: baseline; transition: background .3s; }
   .row:hover { background: var(--panel); }
@@ -132,8 +137,8 @@
   footer .links a { text-decoration: none; border-bottom: 1px solid var(--lilac); padding-bottom: 4px; }
   footer small { grid-column: 1 / -1; color: var(--dim); font-size: 12px; margin-top: 56px; }
 
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-  .reveal.in { opacity: 1; transform: none; }
+  .anim .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .anim .reveal.in { opacity: 1; transform: none; }
 
   @media (max-width: 1000px) {
     nav .links { display: none; }
@@ -149,6 +154,9 @@
     .reveal, .split .w > span, .diagram .ln { opacity: 1 !important; transform: none !important; transition: none !important; }
     .seg { transition: none; } .caret, .hero-bar .rt i { animation: none; }
   }
+  .ghost-fallback svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 40px rgba(144,70,255,.35)); animation: gfloat 3.6s ease-in-out infinite; }
+  @keyframes gfloat { 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .ghost-fallback svg { animation: none; } }
 </style>
 </head>
 <body>
@@ -282,13 +290,20 @@
   <small class="mono">Everything here describes public behavior and my own approach. No internal code, metrics or roadmap.</small>
 </footer>
 
-<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
 <script type="module">
-  import * as THREE from 'three';
-  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-  import { makeGhost3D } from './ghost3d.js';
+  window.__pageOk = true;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  const GHOST_SVG = '<svg viewBox="250 180 700 840" aria-hidden="true"><path fill="#f4efff" d="M398.554 818.914C316.315 1001.03 491.477 1046.74 620.672 940.156C658.687 1059.66 801.052 970.473 852.234 877.795C964.787 673.567 919.318 465.357 907.64 422.374C827.637 129.443 427.623 128.946 358.8 423.865C342.651 475.544 342.402 534.18 333.458 595.051C328.986 625.86 325.507 645.488 313.83 677.785C306.873 696.424 297.68 712.819 282.773 740.645C259.915 783.881 269.604 867.113 387.87 823.883Z"/><path fill="#141018" d="M636 549C603 549 598 510 598 487C598 466 602 449 609 438C615 429 625 424 636 424C648 424 657 429 664 439C672 449 677 466 677 487C677 526 661 549 636 549Z M771 549C738 549 733 510 733 487C733 466 737 449 744 438C751 429 760 424 771 424C783 424 793 429 800 439C808 449 812 466 812 487C812 526 797 549 771 549Z"/></svg>';
+  const noGL = new URLSearchParams(location.search).has('nogl'); // ?nogl previews the fallback
+  // Overlay a static ghost exactly where a canvas sits, keeping the canvas for layout.
+  const ghostOver = (canvas) => {
+    canvas.style.visibility = 'hidden';
+    const d = document.createElement('div'); d.className = 'ghost-fallback'; d.innerHTML = GHOST_SVG; canvas.after(d);
+    const place = () => { d.style.cssText = `position:absolute;left:${canvas.offsetLeft}px;top:${canvas.offsetTop}px;width:${canvas.offsetWidth}px;height:${canvas.offsetHeight}px`; };
+    place(); addEventListener('resize', place);
+  };
 
   /* split words for staggered heading reveals */
   document.querySelectorAll('.split').forEach((el) => {
@@ -314,8 +329,14 @@
   const nav = document.getElementById('nav');
   addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > innerHeight * 0.6), { passive: true });
 
+  let THREE = null, RoomEnvironment = null, makeGhost3D = null;
+  if (!noGL) try {
+    [THREE, { RoomEnvironment }, { makeGhost3D }] = await Promise.all([import('/vendor/three/three.module.js'), import('/vendor/three/addons/environments/RoomEnvironment.js'), import('./ghost3d.js')]);
+  } catch (err) { console.warn('3D disabled:', err); }
+
   /* hero: the Kiro ghost drawn in particles, eyes follow the cursor */
-  {
+  try {
+    if (!THREE) throw new Error('3D unavailable');
     const canvas = document.getElementById('field'), hero = canvas.parentElement;
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); const PR = Math.min(devicePixelRatio, 2); renderer.setPixelRatio(PR);
     const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100); camera.position.z = 14;
@@ -429,6 +450,9 @@
       pmat.opacity = .6 * (1 - scrollK); lmat.opacity = .2 * (1 - scrollK);
       renderer.render(scene, camera);
     });
+  } catch (err) {
+    const f = document.getElementById('field'); f.style.display = 'none';
+    const d = document.createElement('div'); d.className = 'ghost-fallback'; d.innerHTML = GHOST_SVG; f.after(d);
   }
 
   /* hero bar: the runtime lighting up each client in turn */
@@ -439,6 +463,9 @@
   const hub = (() => {
     const canvas = document.getElementById('hub-ghost'), stage = document.getElementById('hub-stage'), svg = document.getElementById('wires');
     const cards = [...document.querySelectorAll('.client')];
+    let gl = null;
+    try {
+      if (!THREE) throw new Error('3D unavailable');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.setSize(280, 300, false);
     const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(30, 280 / 300, 0.1, 100); camera.position.set(0, 0, 8);
@@ -448,6 +475,8 @@
     const ghost = makeGhost3D({ height: 2.7 }); scene.add(ghost);
     const shadow = new THREE.Mesh(new THREE.CircleGeometry(0.9, 48), new THREE.MeshBasicMaterial({ color: '#9046ff', transparent: true, opacity: .14 }));
     shadow.rotation.x = -Math.PI / 2; shadow.position.y = -1.75; scene.add(shadow);
+      gl = { renderer, scene, camera, ghost, shadow };
+    } catch (err) { ghostOver(canvas); }
 
     const NS = 'http://www.w3.org/2000/svg';
     const paths = [], dots = [];
@@ -483,6 +512,8 @@
       dots.forEach(([j, c]) => c.classList.toggle('on', j === i));
     };
     setActive(0);
+    if (gl) {
+    const { renderer, scene, camera, ghost, shadow } = gl;
     const clock = new THREE.Clock();
     renderer.setAnimationLoop(() => {
       if (!visible) return;
@@ -495,6 +526,7 @@
       ghost.userData.update(t, look * 1.6 + pointer.x, pointer.y);
       renderer.render(scene, camera);
     });
+    }
     return { setActive, cards };
   })();
   let userPicked = false;

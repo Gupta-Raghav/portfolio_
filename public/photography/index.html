@@ -4,13 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Raghav Gupta, Photographs</title>
+<script>document.documentElement.classList.add('anim');setTimeout(function(){if(!window.__pageOk)document.documentElement.classList.remove('anim')},2500);</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <style>
   :root { --bg: #0d0c0b; --bg2: #141210; --fg: #f2ede6; --muted: #8e877e; --dim: #5e5850; --line: #2a2622; --accent: #eb5939; --ease: cubic-bezier(.2,.7,.2,1); }
   * { box-sizing: border-box; margin: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--fg); font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  body { background: var(--bg); color: var(--fg); font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip; }
   .mono { font-family: "Geist Mono", ui-monospace, monospace; }
   .serif { font-family: "Instrument Serif", serif; font-weight: 400; }
   a { color: inherit; }
@@ -25,7 +27,7 @@
   nav .links a:hover { opacity: 1; }
 
   /* hero */
-  .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); align-items: center; padding: 96px 5vw 72px; gap: 3vw; overflow: hidden; }
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); align-items: center; padding: 96px 5vw 72px; gap: 3vw; overflow: hidden; }
   .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 55% at 68% 50%, rgba(235,89,57,.13), transparent 70%); pointer-events: none; }
   .eyebrow { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   .hero h1 { font-size: clamp(56px, 8.2vw, 136px); line-height: .9; letter-spacing: -0.02em; margin-top: 18px; }
@@ -38,6 +40,8 @@
   .shutter { margin-top: 32px; display: inline-flex; align-items: center; gap: 12px; padding: 12px 20px 12px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg2); color: var(--fg); font: inherit; font-size: 14px; cursor: pointer; transition: border-color .3s, transform .3s var(--ease); animation: fade 1s .45s var(--ease) both; }
   .shutter:hover { border-color: #4a433c; transform: translateY(-2px); }
   .shutter i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle, var(--fg) 0 38%, transparent 40%), var(--accent); box-shadow: inset 0 0 0 3px var(--bg2); }
+  .stage .cam-fallback { position: absolute; inset: 8% 10%; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .stage .cam-fallback img { width: 100%; height: 100%; object-fit: cover; }
   .stage { position: relative; height: min(76svh, 720px); }
   #cam { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
   #cam:active { cursor: grabbing; }
@@ -46,13 +50,13 @@
 
   /* frames: pinned horizontal strip */
   .frames { position: relative; border-top: 1px solid var(--line); }
-  .frames .pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .frames .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
   .frames .head { display: flex; justify-content: space-between; align-items: end; padding: 0 5vw; margin-bottom: 4vh; }
   .frames h2, .sec-title { font-size: clamp(38px, 4.8vw, 76px); line-height: .95; }
   .count { font-size: 12px; color: var(--muted); }
   .count b { color: var(--fg); font-weight: 500; }
   .track { display: flex; gap: 3vw; padding: 0 5vw; will-change: transform; }
-  .frame { flex: none; height: 62svh; position: relative; cursor: zoom-in; }
+  .frame { flex: none; height: 62vh; height: 62svh; position: relative; cursor: zoom-in; }
   .frame .ph { height: 100%; overflow: hidden; border-radius: 4px; background: var(--bg2); }
   .frame img { height: 100%; width: auto; object-fit: cover; transform: scale(1.12); transition: filter .6s var(--ease); filter: saturate(.92); will-change: transform; }
   .frame:hover img { filter: saturate(1.05); }
@@ -76,8 +80,9 @@
   .set.flip .meta { grid-column: 9 / 13; order: 2; }
   .set.flip .pics { grid-column: 1 / 9; }
   .shot { position: relative; cursor: zoom-in; }
-  .shot .ph { overflow: hidden; border-radius: 4px; clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease); background: var(--bg2); }
-  .shot.in .ph { clip-path: inset(0 0 0 0); }
+  .shot .ph { overflow: hidden; border-radius: 4px; background: var(--bg2); }
+  .anim .shot .ph { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease); }
+  .anim .shot.in .ph { clip-path: inset(0 0 0 0); }
   .shot img { width: 100%; height: auto; transform: scale(1.18); transition: transform 1.6s var(--ease); }
   .shot.in img { transform: scale(1.04); }
   .shot:hover img { transform: scale(1.08); }
@@ -129,11 +134,11 @@
   footer .links a { text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 3px; }
 
   /* lightbox */
-  dialog.lb { border: 0; padding: 0; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; background: rgba(8,7,6,.97); color: var(--fg); }
+  dialog.lb { border: 0; padding: 0; margin: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; background: rgba(8,7,6,.97); color: var(--fg); }
   dialog.lb::backdrop { background: transparent; }
   .lb-in { height: 100%; display: grid; grid-template-columns: 1fr 300px; }
   .lb-img { position: relative; display: flex; align-items: center; justify-content: center; padding: 5vh 4vw; min-height: 0; }
-  .lb-img img { max-height: 90dvh; max-width: 100%; object-fit: contain; border-radius: 3px; animation: lbIn .5s var(--ease); }
+  .lb-img img { max-height: 90vh; max-height: 90dvh; max-width: 100%; object-fit: contain; border-radius: 3px; animation: lbIn .5s var(--ease); }
   .lb-side { border-left: 1px solid var(--line); padding: 30px 28px; display: flex; flex-direction: column; gap: 18px; }
   .lb-side h3 { font-size: 36px; line-height: 1; }
   .lb-side dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; font-size: 12.5px; }
@@ -143,8 +148,8 @@
   .lb-side button:hover { border-color: #4a433c; }
   .lb-close { position: absolute; top: 18px; right: 18px; }
 
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-  .reveal.in { opacity: 1; transform: none; }
+  .anim .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .anim .reveal.in { opacity: 1; transform: none; }
   @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
   @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   @keyframes lbIn { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
@@ -152,11 +157,11 @@
   @media (max-width: 900px) {
     nav .links a:not(.keep) { display: none; }
     .hero { grid-template-columns: 1fr; padding-top: 84px; }
-    .stage { order: -1; height: 42svh; }
+    .stage { order: -1; height: 42vh; height: 42svh; }
     .spec { position: static; margin-top: 28px; flex-wrap: wrap; }
     .frames .pin { position: static; height: auto; padding: 14vh 0 10vh; }
     .track { overflow-x: auto; scroll-snap-type: x mandatory; transform: none !important; padding-bottom: 8px; scrollbar-width: none; }
-    .frame { height: 56svh; scroll-snap-align: center; }
+    .frame { height: 56vh; height: 56svh; scroll-snap-align: center; }
     .progress { display: none; }
     .set, .set.flip { grid-template-columns: 1fr; gap: 28px; margin-bottom: 14vh; }
     .set .meta, .set.flip .meta { grid-column: auto; order: 0; position: static; }
@@ -170,13 +175,13 @@
     .lb-in { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
     .lb-side { border-left: 0; border-top: 1px solid var(--line); padding: 18px 20px; }
     .lb-side h3 { font-size: 26px; }
-    .lb-img img { max-height: 62dvh; }
+    .lb-img img { max-height: 62vh; max-height: 62dvh; }
   }
   @media (max-width: 600px) {
     .jrow { flex-direction: column; gap: 5vh; }
     .jrow .shot { width: 100%; }
-    .jrow .shot .ph { max-height: 72svh; }
-    .jrow .shot .ph img { height: 100%; max-height: 72svh; }
+    .jrow .shot .ph { max-height: 72vh; max-height: 72svh; }
+    .jrow .shot .ph img { height: 100%; max-height: 72vh; max-height: 72svh; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -184,6 +189,9 @@
     .shot .ph { clip-path: none; transition: none; } .shot img, .frame img { transform: none; transition: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
   }
+  .ghost-fallback svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 40px rgba(144,70,255,.35)); animation: gfloat 3.6s ease-in-out infinite; }
+  @keyframes gfloat { 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .ghost-fallback svg { animation: none; } }
 </style>
 </head>
 <body>
@@ -263,8 +271,8 @@
   </div>
 </dialog>
 
-<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
 <script type="module">
+  window.__pageOk = true;
   /* ---------- photo data (generated by design-templates/_review/build_photos.py) ---------- */
   const { default: PHOTOS } = await import('./photos.js');
   // The trip, in the order it happened.
@@ -309,7 +317,7 @@
   const rowsOf = (items) => {
     const wideLead = items[0].p.w / items[0].p.h > 1.2, start = wideLead ? 1 : 0, rows = wideLead ? [[items[0]]] : [];
     for (let k = start; k < items.length; k += 2) rows.push(items.slice(k, k + 2));
-    if (rows.length > 1 && rows.at(-1).length === 1 && rows.at(-2).length > 1) rows.at(-2).push(rows.pop()[0]);
+    if (rows.length > 1 && rows[rows.length - 1].length === 1 && rows[rows.length - 2].length > 1) rows[rows.length - 2].push(rows.pop()[0]);
     return rows;
   };
   const sets = document.getElementById('sets'), idx = Object.fromEntries(PHOTOS.map((p, i) => [p.title, i]));
@@ -391,10 +399,13 @@
   lb.addEventListener('touchend', (e) => { if (touchX === null) return; const dx = e.changedTouches[0].clientX - touchX; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); touchX = null; });
 
   /* ---------- 3D camera ---------- */
-  const THREE = await import('three');
-  const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
-  const { makeCamera } = await import('./camera3d.js');
-  const canvas = document.getElementById('cam');
+  const flash = document.getElementById('flash'), canvas = document.getElementById('cam');
+  const pop = (o) => { if (!reduce && flash.animate) flash.animate([{ opacity: 0 }, { opacity: o }, { opacity: 0 }], { duration: 500, easing: 'ease-out' }); };
+  let shoot = () => {};
+  document.getElementById('shutter').onclick = () => { shoot(); pop(.9); setTimeout(() => document.getElementById('frames').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 420); };
+  try {
+  if (new URLSearchParams(location.search).has('nogl')) throw new Error('3D preview disabled');
+  const [THREE, { RoomEnvironment }, { makeCamera }] = await Promise.all([import('/vendor/three/three.module.js'), import('/vendor/three/addons/environments/RoomEnvironment.js'), import('./camera3d.js')]);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   const scene = new THREE.Scene(), view = new THREE.PerspectiveCamera(30, 1, 0.1, 100); view.position.set(0, 0.25, 4.6);
@@ -414,14 +425,8 @@
   canvas.addEventListener('pointerup', () => { drag = null; });
   let visible = true; new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
 
-  const flash = document.getElementById('flash');
-  const fire = () => {
-    camera.userData.shoot();
-    if (!reduce) flash.animate([{ opacity: 0 }, { opacity: .9, offset: .15 }, { opacity: 0 }], { duration: 520, easing: 'ease-out' });
-    setTimeout(() => document.getElementById('frames').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 420);
-  };
-  document.getElementById('shutter').onclick = fire;
-  canvas.addEventListener('dblclick', () => { camera.userData.shoot(); if (!reduce) flash.animate([{ opacity: 0 }, { opacity: .8, offset: .15 }, { opacity: 0 }], { duration: 480 }); });
+  shoot = () => camera.userData.shoot();
+  canvas.addEventListener('dblclick', () => { shoot(); pop(.8); });
 
   const clock = new THREE.Clock();
   renderer.setAnimationLoop(() => {
@@ -438,6 +443,12 @@
     camera.userData.update(dt);
     renderer.render(scene, view);
   });
+  } catch (err) {
+    console.warn('3D disabled:', err);
+    canvas.style.display = 'none';
+    const d = document.createElement('figure'); d.className = 'cam-fallback';
+    d.innerHTML = `<img src="${PHOTOS[0].small}" alt="${alt(PHOTOS[0])}">`; canvas.after(d);
+  }
 </script>
 </body>
 </html>
